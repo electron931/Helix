@@ -1,6 +1,7 @@
 package com.satanssoft.helix.service;
 
 import com.satanssoft.helix.hibernate.model.Category;
+import com.satanssoft.helix.hibernate.model.Post;
 
 import java.util.List;
 
@@ -11,5 +12,6 @@ public interface CategoryService {
     public List<Category> getAllCategories();
     public Category getCategoryById(int category_id);
     public void removeCategory(int category_id);
+    public List<Post> getAllPostsForCategory(int category_id);
 
 }

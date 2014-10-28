@@ -67,6 +67,13 @@
         <property name="categoryDAO" ref="categoryDAO" />
     </bean>
 
+    <bean id="postDAO" class="com.satanssoft.helix.hibernate.dao.PostDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <bean id="postService" class="com.satanssoft.helix.service.impl.PostServiceImpl">
+        <property name="postDAO" ref="postDAO" />
+    </bean>
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

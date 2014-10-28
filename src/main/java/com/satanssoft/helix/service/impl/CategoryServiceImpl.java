@@ -2,6 +2,7 @@ package com.satanssoft.helix.service.impl;
 
 import com.satanssoft.helix.dao.CategoryDAO;
 import com.satanssoft.helix.hibernate.model.Category;
+import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.service.CategoryService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,4 +46,9 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryDAO.removeCategory(category_id);
     }
 
+    @Override
+    @Transactional
+    public List<Post> getAllPostsForCategory(int category_id) {
+        return null;
+    }
 }

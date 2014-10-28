@@ -1,6 +1,7 @@
 package com.satanssoft.helix.hibernate.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -21,6 +22,9 @@ public class Category {
 
     @Column(name="description", nullable = true)
     private String description;
+
+    @OneToMany(mappedBy = "categoryId")
+    private List<Post> posts;
 
 
     public int getId() {
@@ -49,6 +53,14 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
 }

@@ -2,6 +2,7 @@ package com.satanssoft.helix.hibernate.dao;
 
 import com.satanssoft.helix.dao.CategoryDAO;
 import com.satanssoft.helix.hibernate.model.Category;
+import com.satanssoft.helix.hibernate.model.Post;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -30,24 +31,28 @@ public class CategoryDAOImpl implements CategoryDAO {
     @Override
     public List<Category> getAllCategories() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Category> categories = session.createQuery("from category").list();
+        List<Category> categories = session.createCriteria(Category.class).list();
         return categories;
     }
 
     @Override
     public Category getCategoryById(int category_id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Category category = (Category) session.load(Category.class, new Integer(category_id));
+        Category category = (Category) session.get(Category.class, category_id);
         return category;
     }
 
     @Override
     public void removeCategory(int category_id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Category category = (Category) session.load(Category.class, new Integer(category_id));
+        Category category = (Category) session.get(Category.class, category_id);
         if(category != null){
             session.delete(category);
         }
     }
 
+    @Override
+    public List<Post> getAllPostsForCategory(int category_id) {
+        return null;
+    }
 }
