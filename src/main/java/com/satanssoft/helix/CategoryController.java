@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CategoryController {
@@ -21,15 +22,19 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/addCategory", method = RequestMethod.GET)
-    public String about(Model model) {
+    //public String test(@RequestParam("category_id") int category_id, Model model) {
+    public String test(Model model) {
 
         Category category = new Category();
-        category.setTitle("Handyman");
-        category.setDescription("Awesome handyman");
-        category.setUrlSlug("handyman");
+        category.setTitle("Интересное");
+        category.setDescription("Очень интересное");
+        category.setUrlSlug("interesting");
 
         this.categoryService.addCategory(category);
         System.out.println("Category saved!");
+
+        /*this.categoryService.removeCategory(category_id);
+        System.out.println("Category deleted!");*/
 
         return "redirect:/home";
     }
