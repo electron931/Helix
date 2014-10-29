@@ -1,5 +1,7 @@
 package com.satanssoft.helix.hibernate.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -19,9 +21,11 @@ public class Post {
     private String title;
 
     @Column(name = "shortDescription", nullable = false)
+    @Type(type = "text")
     private String shortDescription;
 
     @Column(name = "description", nullable = false)
+    @Type(type = "text")
     private String description;
 
     @Column(name = "urlSlug", unique = true, nullable = false)
@@ -41,7 +45,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private Category categoryId;
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = true)        //for testing!!!
@@ -122,11 +126,11 @@ public class Post {
     }
 
     public Category getCategoryId() {
-        return categoryId;
+        return category;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryId(Category category) {
+        this.category = category;
     }
 
     public User getAuthorId() {

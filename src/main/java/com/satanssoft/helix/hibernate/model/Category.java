@@ -1,5 +1,7 @@
 package com.satanssoft.helix.hibernate.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -21,9 +23,10 @@ public class Category {
     private String urlSlug;
 
     @Column(name="description", nullable = true)
+    @Type(type = "text")
     private String description;
 
-    @OneToMany(mappedBy = "categoryId")
+    @OneToMany(mappedBy = "category")
     private List<Post> posts;
 
 

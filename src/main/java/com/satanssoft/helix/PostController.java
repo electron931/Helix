@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class PostController {
@@ -41,10 +42,10 @@ public class PostController {
         Category category = this.categoryService.getCategoryById(1);
 
         Post post = new Post();
-        post.setTitle("А Вы готовы?");
-        post.setShortDescription("ala");
-        post.setDescription("alalalalal");
-        post.setUrlSlug("ready");
+        post.setTitle("Пост на русском!");
+        post.setShortDescription("Дождались");
+        post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
+        post.setUrlSlug("russian");
         post.setPublished(true);
         post.setPostedOnDate(new Date());
         post.setCategoryId(category);
@@ -52,6 +53,11 @@ public class PostController {
         this.postService.addPost(post);
 
         System.out.println("Post saved!");
+
+        List<Post> posts = this.categoryService.getAllPostsForCategory(category);
+        for (Post item : posts) {
+            System.out.println(item.getTitle() + ", " + item.getShortDescription());
+        }
 
         /*this.categoryService.removeCategory(category_id);
         System.out.println("Category deleted!");*/

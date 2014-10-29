@@ -1,5 +1,7 @@
 package com.satanssoft.helix.hibernate.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,6 +17,7 @@ public class Comment {
     private int id;
 
     @Column(name = "text", nullable = false)
+    @Type(type = "text")
     private String text;
 
     @Column(name = "likesCount", nullable = false)

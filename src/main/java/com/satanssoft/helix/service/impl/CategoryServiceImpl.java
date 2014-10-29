@@ -48,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public List<Post> getAllPostsForCategory(int category_id) {
-        return null;
+    public List<Post> getAllPostsForCategory(Category category) {
+        return this.categoryDAO.getAllPostsForCategory(category);
     }
 }

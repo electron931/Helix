@@ -5,6 +5,7 @@ import com.satanssoft.helix.hibernate.model.Category;
 import com.satanssoft.helix.hibernate.model.Post;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -52,7 +53,12 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public List<Post> getAllPostsForCategory(int category_id) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public List<Post> getAllPostsForCategory(Category category) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Post> posts = session.createCriteria(Post.class)
+                .add(Restrictions.like("category", category))
+                .list();
+        return posts;
     }
 }

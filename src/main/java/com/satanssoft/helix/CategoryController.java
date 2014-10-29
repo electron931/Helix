@@ -26,9 +26,9 @@ public class CategoryController {
     public String test(Model model) {
 
         Category category = new Category();
-        category.setTitle("Интересное");
-        category.setDescription("Очень интересное");
-        category.setUrlSlug("interesting");
+        category.setTitle("News");
+        category.setDescription("Awesome news");
+        category.setUrlSlug("news");
 
         this.categoryService.addCategory(category);
         System.out.println("Category saved!");

@@ -12,6 +12,6 @@ public interface CategoryDAO {
     public List<Category> getAllCategories();
     public Category getCategoryById(int category_id);
     public void removeCategory(int category_id);
-    public List<Post> getAllPostsForCategory(int category_id);
+    public List<Post> getAllPostsForCategory(Category category);
 
 }
