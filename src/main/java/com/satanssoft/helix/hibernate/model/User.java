@@ -3,6 +3,7 @@ package com.satanssoft.helix.hibernate.model;
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
 @Table(name = "users",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id"})})

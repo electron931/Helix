@@ -13,7 +13,7 @@ public interface PostDAO {
     public List<Post> getAllPosts();
     public Post getPostById(int post_id);
     public void removePost(int post_id);
-    public List<Comment> getAllCommentsForPost(int post_id);
-    public List<Tag> getAllTagsForPost(int post_id);
+    public List<Comment> getAllCommentsForPost(Post post);
+    public List<Tag> getAllTagsForPost(Post post);
     
 }

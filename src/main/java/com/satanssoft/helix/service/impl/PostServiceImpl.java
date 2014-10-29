@@ -49,13 +49,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public List<Comment> getAllCommentsForPost(int post_id) {
-        return null;
+    public List<Comment> getAllCommentsForPost(Post post) {
+        return this.postDAO.getAllCommentsForPost(post);
     }
 
     @Override
     @Transactional
-    public List<Tag> getAllTagsForPost(int post_id) {
-        return null;
+    public List<Tag> getAllTagsForPost(Post post) {
+        return this.postDAO.getAllTagsForPost(post);
     }
 }

@@ -30,6 +30,7 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Category> getAllCategories() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Category> categories = session.createCriteria(Category.class).list();

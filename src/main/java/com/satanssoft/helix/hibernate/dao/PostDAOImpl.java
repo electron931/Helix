@@ -31,6 +31,7 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Post> getAllPosts() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Post> posts = session.createCriteria(Post.class).list();
@@ -54,12 +55,12 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public List<Comment> getAllCommentsForPost(int post_id) {
+    public List<Comment> getAllCommentsForPost(Post post) {
         return null;
     }
 
     @Override
-    public List<Tag> getAllTagsForPost(int post_id) {
+    public List<Tag> getAllTagsForPost(Post post) {
         return null;
     }
 
