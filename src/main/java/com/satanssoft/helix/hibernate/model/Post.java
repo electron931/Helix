@@ -48,7 +48,7 @@ public class Post {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = true)        //for testing!!!
+    @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
     @OneToMany(mappedBy = "post")
