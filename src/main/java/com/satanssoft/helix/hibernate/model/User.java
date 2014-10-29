@@ -25,10 +25,10 @@ public class User {
     @Column(name = "type", length = 10, nullable = false)
     private String type;
 
-    @OneToMany(mappedBy = "authorId")
+    @OneToMany(mappedBy = "author")
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
 

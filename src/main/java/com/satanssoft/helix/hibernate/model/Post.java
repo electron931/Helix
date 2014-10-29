@@ -49,9 +49,9 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = true)        //for testing!!!
-    private User authorId;
+    private User author;
 
-    @OneToMany(mappedBy = "postId")
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
     //Hibernate requires no-args constructor
@@ -125,20 +125,20 @@ public class Post {
         this.modifiedDate = modifiedDate;
     }
 
-    public Category getCategoryId() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategoryId(Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public User getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(User authorId) {
-        this.authorId = authorId;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public List<Comment> getComments() {

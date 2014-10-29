@@ -42,13 +42,13 @@ public class PostController {
         Category category = this.categoryService.getCategoryById(1);
 
         Post post = new Post();
-        post.setTitle("Пост на русском!");
-        post.setShortDescription("Дождались");
+        post.setTitle("Опять пост на русском!");
+        post.setShortDescription("снова дождались");
         post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
-        post.setUrlSlug("russian");
+        post.setUrlSlug("russian2");
         post.setPublished(true);
         post.setPostedOnDate(new Date());
-        post.setCategoryId(category);
+        post.setCategory(category);
 
         this.postService.addPost(post);
 
