@@ -32,6 +32,10 @@ public class Comment {
     @Column(name = "modifiedDate", nullable = true)
     private Date modifiedDate;
 
+    @Column(name = "parentCommentId", nullable = true)
+    @Type(type = "int")
+    private Comment parentComment;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -103,5 +107,13 @@ public class Comment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Comment getParentComment() {
+        return parentComment;
+    }
+
+    public void setParentComment(Comment parentComment) {
+        this.parentComment = parentComment;
     }
 }

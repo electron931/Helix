@@ -2,8 +2,11 @@ package com.satanssoft.helix;
 
 import com.satanssoft.helix.hibernate.model.Category;
 import com.satanssoft.helix.hibernate.model.Post;
+import com.satanssoft.helix.hibernate.model.User;
 import com.satanssoft.helix.service.CategoryService;
 import com.satanssoft.helix.service.PostService;
+import com.satanssoft.helix.service.TagService;
+import com.satanssoft.helix.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,6 +26,8 @@ public class PostController {
 
     private PostService postService;
     private CategoryService categoryService;
+    private TagService tagService;
+    private UserService userService;
 
     @Autowired(required = true)
     @Qualifier(value = "postService")
@@ -37,31 +42,42 @@ public class PostController {
         this.categoryService = categoryService;
     }
 
+    @Autowired(required = true)
+    @Qualifier(value = "tagService")
+    public void setTagService(TagService tagService) {
+        this.tagService = tagService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "userService")
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     //public String test(@RequestParam("category_id") int category_id, Model model) {
     public String test(Model model) {
 
-        Category category = this.categoryService.getCategoryById(1);
 
-        /*Post post = new Post();
-        post.setTitle("Опять пост на русском!");
-        post.setShortDescription("снова дождались");
+
+        Category category = this.categoryService.getCategoryById(1);
+        User user = this.userService.getUserById(1);
+
+        Post post = new Post();
+        post.setTitle("First post");
+        post.setShortDescription("lorem ipsum");
         post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
-        post.setUrlSlug("russian2");
+        post.setUrlSlug("first");
         post.setPublished(true);
         post.setPostedOnDate(new Date());
         post.setCategory(category);
+        post.setAuthor(user);
 
         this.postService.addPost(post);
 
-        System.out.println("Post saved!");*/
+        System.out.println("Post saved!");
 
-        List<Post> posts = this.categoryService.getAllPostsForCategory(category);
-        for (Post item : posts) {
-            logger.info(item.getTitle() + ", " + item.getShortDescription());
-            System.out.println(item.getTitle() + ", " + item.getShortDescription());
-        }
 
         /*this.categoryService.removeCategory(category_id);
         System.out.println("Category deleted!");*/

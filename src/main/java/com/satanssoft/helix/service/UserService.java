@@ -1,11 +1,11 @@
-package com.satanssoft.helix.dao;
+package com.satanssoft.helix.service;
 
 import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.hibernate.model.User;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface UserService {
 
     public void addUser(User user);
     public void updateUser(User user);

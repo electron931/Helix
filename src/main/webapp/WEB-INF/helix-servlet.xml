@@ -74,6 +74,28 @@
         <property name="postDAO" ref="postDAO" />
     </bean>
 
+    <bean id="userDAO" class="com.satanssoft.helix.hibernate.dao.UserDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <bean id="userService" class="com.satanssoft.helix.service.impl.UserServiceImpl">
+        <property name="userDAO" ref="userDAO" />
+    </bean>
+
+    <bean id="tagDAO" class="com.satanssoft.helix.hibernate.dao.TagDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <bean id="tagService" class="com.satanssoft.helix.service.impl.TagServiceImpl">
+        <property name="tagDAO" ref="tagDAO" />
+    </bean>
+
+    <bean id="commentDAO" class="com.satanssoft.helix.hibernate.dao.CommentDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <bean id="commentService" class="com.satanssoft.helix.service.impl.CommentServiceImpl">
+        <property name="commentDAO" ref="commentDAO" />
+    </bean>
+
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
