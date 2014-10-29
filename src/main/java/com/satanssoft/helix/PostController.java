@@ -2,6 +2,7 @@ package com.satanssoft.helix;
 
 import com.satanssoft.helix.hibernate.model.Category;
 import com.satanssoft.helix.hibernate.model.Post;
+import com.satanssoft.helix.hibernate.model.Tag;
 import com.satanssoft.helix.hibernate.model.User;
 import com.satanssoft.helix.service.CategoryService;
 import com.satanssoft.helix.service.PostService;
@@ -73,6 +74,9 @@ public class PostController {
         post.setPostedOnDate(new Date());
         post.setCategory(category);
         post.setAuthor(user);
+
+        List<Tag> tags = this.tagService.getAllTags();
+        post.setTags(tags);
 
         this.postService.addPost(post);
 

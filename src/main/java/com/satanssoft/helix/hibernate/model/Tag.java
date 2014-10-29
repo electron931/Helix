@@ -1,6 +1,7 @@
 package com.satanssoft.helix.hibernate.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,11 +21,10 @@ public class Tag {
     @Column(name = "urlSlug", nullable = false)
     private String urlSlug;
 
-    @ManyToMany(targetEntity = Post.class, cascade = { CascadeType.ALL })
-    @JoinTable(name = "tags_posts",
-            joinColumns = { @JoinColumn(name = "tag_id") },
-            inverseJoinColumns = { @JoinColumn(name = "post_id") })
-    private List<Post> posts;
+
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
+    private List<Post> posts = new ArrayList<Post>();
 
 
     public int getId() {

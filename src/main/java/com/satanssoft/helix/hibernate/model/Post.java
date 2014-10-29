@@ -3,6 +3,7 @@ package com.satanssoft.helix.hibernate.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,15 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
+
+
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "posts_tags",
+            joinColumns = { @JoinColumn(name = "post_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id", nullable = false, updatable = false) })
+    private List<Tag> tags = new ArrayList<Tag>();
 
     //Hibernate requires no-args constructor
     public Post() {}
@@ -147,5 +157,13 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
