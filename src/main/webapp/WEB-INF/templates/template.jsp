@@ -4,11 +4,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Default tiles template</title>
+    <title>Helix</title>
 
     <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css" />
 
     <link rel="stylesheet" href="/resources/css/style.css">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
 
     <script src="/resources/vendor/jquery/jquery-1.11.1.min.js"></script>
@@ -19,8 +21,12 @@
         <tiles:insertAttribute name="header" />
     </header>
 
-    <div class="content">
-        <tiles:insertAttribute name="content" />
+    <div class="container">
+        <div class="row">
+            <tiles:insertAttribute name="content" />
+            <%--<tiles:insertAttribute name="sidebar" />--%>
+            <hr>
+        </div>
     </div>
 
     <footer>

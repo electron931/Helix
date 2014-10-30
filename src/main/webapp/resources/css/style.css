@@ -2,3 +2,7 @@ body {
     margin:0px;
     padding:0px;
 }
+
+body > .container {
+    padding: 60px 15px 0;
+}
