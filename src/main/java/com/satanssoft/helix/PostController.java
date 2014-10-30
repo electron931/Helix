@@ -65,11 +65,11 @@ public class PostController {
         Category category = this.categoryService.getCategoryById(1);
         User user = this.userService.getUserById(1);
 
-        Post post = new Post();
-        post.setTitle("First post");
+        /*Post post = new Post();
+        post.setTitle("Second post");
         post.setShortDescription("lorem ipsum");
         post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
-        post.setUrlSlug("first");
+        post.setUrlSlug("second");
         post.setPublished(true);
         post.setPostedOnDate(new Date());
         post.setCategory(category);
@@ -78,9 +78,12 @@ public class PostController {
         List<Tag> tags = this.tagService.getAllTags();
         post.setTags(tags);
 
-        this.postService.addPost(post);
+        this.postService.addPost(post);*/
 
-        System.out.println("Post saved!");
+        List<Post> posts = this.tagService.getAllPostsForTag(this.tagService.getTagById(1));
+        for (Post post : posts) {
+            System.out.println("WORK!!: " + post.getTitle());
+        }
 
 
         /*this.categoryService.removeCategory(category_id);
