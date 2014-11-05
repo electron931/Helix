@@ -101,6 +101,8 @@
 
         </div>
 
+        <jsp:include page="sidebar.jsp" />
+
 
     </tiles:putAttribute>
 </tiles:insertDefinition>

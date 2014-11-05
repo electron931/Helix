@@ -52,6 +52,7 @@ public class HomeController {
 
 
         model.addAttribute("posts", posts);
+        model.addAttribute("title", "Helix");
         model.addAttribute("categories", categories);
 
         return "home";

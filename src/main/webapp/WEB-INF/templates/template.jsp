@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Helix</title>
+    <title>${title}</title>
 
     <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css" />
 
@@ -26,7 +26,6 @@
     <div class="container">
         <div class="row">
             <tiles:insertAttribute name="content" />
-            <%--<tiles:insertAttribute name="sidebar" />--%>
             <hr>
         </div>
     </div>

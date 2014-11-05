@@ -60,9 +60,12 @@ public class PostController {
 
         Post post = this.postService.getPostByUrlSlug(postSlug);
         List<Tag> tags = this.postService.getAllTagsForPost(post);
+        List<Category> categories = this.categoryService.getAllCategories();
 
         model.addAttribute("post", post);
+        model.addAttribute("title", post.getTitle() + " | Helix");
         model.addAttribute("tags", tags);
+        model.addAttribute("categories", categories);
 
         return "singlePost";
     }

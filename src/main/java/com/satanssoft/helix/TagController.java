@@ -71,8 +71,9 @@ public class TagController {
         List<Category> categories = this.categoryService.getAllCategories();
 
         model.addAttribute("posts", posts);
-        model.addAttribute("categories", categories);
+        model.addAttribute("title", tag.getName() + " | Helix");
         model.addAttribute("currentTag", tag);
+        model.addAttribute("categories", categories);
 
         return "postsForTag";
     }
