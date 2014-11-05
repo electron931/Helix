@@ -37,8 +37,20 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
+    public List<Post> getPostsForPage(int pageNumber, int postsPerPage) {
+        return this.postDAO.getPostsForPage(pageNumber, postsPerPage);
+    }
+
+    @Override
+    @Transactional
     public Post getPostById(int post_id) {
         return this.postDAO.getPostById(post_id);
+    }
+
+    @Override
+    @Transactional
+    public Post getPostByUrlSlug(String urlSlug) {
+        return this.postDAO.getPostByUrlSlug(urlSlug);
     }
 
     @Override

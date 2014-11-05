@@ -15,6 +15,8 @@
 
     <script src="/resources/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="/resources/js/main.js"></script>
 </head>
 <body>
     <header>

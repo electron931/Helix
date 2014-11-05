@@ -13,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/posts")
 public class PostController {
 
     private static final Logger logger = Logger.getLogger(PostController.class);
@@ -56,7 +55,19 @@ public class PostController {
     }
 
 
-    @RequestMapping(value = "/posts", method = RequestMethod.GET)
+    @RequestMapping(value = "/{postSlug}")
+    public String singlePost(Model model, @PathVariable("postSlug") String postSlug) {
+
+        Post post = this.postService.getPostByUrlSlug(postSlug);
+        List<Tag> tags = this.postService.getAllTagsForPost(post);
+
+        model.addAttribute("post", post);
+        model.addAttribute("tags", tags);
+
+        return "singlePost";
+    }
+
+    @RequestMapping(value = "/addAll", method = RequestMethod.GET)
     //public String test(@RequestParam("category_id") int category_id, Model model) {
     public String test(Model model) {
 
@@ -65,31 +76,26 @@ public class PostController {
         Category category = this.categoryService.getCategoryById(1);
         User user = this.userService.getUserById(1);
 
-        /*Post post = new Post();
-        post.setTitle("Second post");
-        post.setShortDescription("lorem ipsum");
-        post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
-        post.setUrlSlug("second");
-        post.setPublished(true);
-        post.setPostedOnDate(new Date());
-        post.setCategory(category);
-        post.setAuthor(user);
-
         List<Tag> tags = this.tagService.getAllTags();
-        post.setTags(tags);
 
-        this.postService.addPost(post);*/
+        for (int i = 0; i < 30; i++) {
+            Post post = new Post();
+            post.setTitle("Post" + i);
+            post.setShortDescription("lorem ipsum");
+            post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
+            post.setUrlSlug("post" + i);
+            post.setPublished(true);
+            post.setPostedOnDate(new Date());
+            post.setCategory(category);
+            post.setAuthor(user);
 
-        List<Post> posts = this.tagService.getAllPostsForTag(this.tagService.getTagById(1));
-        for (Post post : posts) {
-            System.out.println("WORK!!: " + post.getTitle());
+            post.setTags(tags);
+
+            this.postService.addPost(post);
         }
 
 
-        /*this.categoryService.removeCategory(category_id);
-        System.out.println("Category deleted!");*/
-
-        return "redirect:/home";
+        return "redirect:/";
     }
 
 }

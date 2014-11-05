@@ -6,3 +6,18 @@ body {
 body > .container {
     padding: 60px 15px 0;
 }
+
+.tags {
+    margin-bottom: 20px;
+}
+
+.loadMorePosts {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.loadMorePosts button {
+    width: 70%;
+    height: 50px;
+    font-size: 20px;
+}

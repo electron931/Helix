@@ -7,6 +7,7 @@ import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.hibernate.model.Tag;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -39,9 +40,29 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
+    public List<Post> getPostsForPage(int pageNumber, int postsPerPage) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Post> posts = session.createQuery("from Post")
+                .setFirstResult( (pageNumber - 1) * postsPerPage )
+                .setMaxResults(postsPerPage)
+                .list();
+        return posts;
+    }
+
+    @Override
     public Post getPostById(int post_id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Post post = (Post) session.get(Category.class, post_id);
+        Post post = (Post) session.get(Post.class, post_id);
+        return post;
+    }
+
+    @Override
+    public Post getPostByUrlSlug(String urlSlug) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Post post = (Post) session.createCriteria(Post.class)
+                .add(Restrictions.eq("urlSlug", urlSlug))
+                .uniqueResult();
         return post;
     }
 
@@ -60,8 +81,14 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Tag> getAllTagsForPost(Post post) {
-        return null;
+        String hql = "select u from Tag u inner join u.posts r where r.id =:id";
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Tag> tags = session.createQuery(hql)
+                .setInteger("id", post.getId())
+                .list();
+        return tags;
     }
 
 }

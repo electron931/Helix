@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import java.util.List;
@@ -23,6 +23,9 @@ import java.util.List;
 public class HomeController {
 
     private static final Logger logger = Logger.getLogger(HomeController.class);
+
+    private int POSTS_PER_PAGE = 10;
+    private int pageNumber;
 
     private PostService postService;
     private CategoryService categoryService;
@@ -42,7 +45,9 @@ public class HomeController {
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String home(Model model) {
 
-        List<Post> posts = this.postService.getAllPosts();
+        pageNumber = 1;
+
+        List<Post> posts = this.postService.getPostsForPage(pageNumber, POSTS_PER_PAGE);
         List<Category> categories = this.categoryService.getAllCategories();
 
 
@@ -50,6 +55,20 @@ public class HomeController {
         model.addAttribute("categories", categories);
 
         return "home";
+    }
+
+
+    @RequestMapping(value = {"/"}, method = RequestMethod.POST)
+    public String loadMorePosts(Model model) {
+
+        pageNumber++;
+        List<Post> posts = this.postService.getPostsForPage(pageNumber, POSTS_PER_PAGE);
+
+
+        model.addAttribute("posts", posts);
+        //model.addAttribute("categories", categories);
+
+        return "posts";
     }
 
 
