@@ -132,6 +132,8 @@ public class CategoryController {
 
         List<Tag> tags = this.tagService.getAllTags();
 
+        int imageCounter = 1;
+
         for (int i = 1; i <= 30; i++) {
             Post post = new Post();
             post.setTitle("Post" + i);
@@ -140,6 +142,11 @@ public class CategoryController {
             post.setUrlSlug("post" + i);
             post.setPublished(true);
             post.setPostedOnDate(new Date());
+            post.setThumbnail("pic" + imageCounter++ + ".jpg");
+
+            if (imageCounter > 9) {
+                imageCounter = 1;
+            }
 
             if (i % 2 == 0) {
                 post.setCategory(this.categoryService.getCategoryById(1));
