@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <tiles:insertDefinition name="defaultTemplate">
@@ -21,7 +22,7 @@
             <hr>
 
             <!-- Date/Time -->
-            <p><span class="glyphicon glyphicon-time"></span> Posted on ${post.postedOnDate}</p>
+            <p><span class="glyphicon glyphicon-time"></span> Posted on <fmt:formatDate value="${post.postedOnDate}" pattern="yyyy-MM-dd HH:mm" /></p>
 
             <hr>
 

@@ -69,11 +69,13 @@ public class TagController {
         List<Post> posts = this.tagService
                 .getAllPostsForTag(tag, pageNumber, POSTS_PER_PAGE);
         List<Category> categories = this.categoryService.getAllCategories();
+        List<Tag> allTags = this.tagService.getAllTags();
 
         model.addAttribute("posts", posts);
         model.addAttribute("title", tag.getName() + " | Helix");
         model.addAttribute("currentTag", tag);
         model.addAttribute("categories", categories);
+        model.addAttribute("allTags", allTags);
 
         return "postsForTag";
     }

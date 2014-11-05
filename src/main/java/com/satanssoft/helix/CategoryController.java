@@ -73,11 +73,13 @@ public class CategoryController {
         List<Post> posts = this.categoryService
                 .getAllPostsForCategory(category, pageNumber, POSTS_PER_PAGE);
         List<Category> categories = this.categoryService.getAllCategories();
+        List<Tag> allTags =  this.tagService.getAllTags();
 
         model.addAttribute("posts", posts);
         model.addAttribute("title",  category.getTitle() + " | Helix");
         model.addAttribute("currentCategory", category);
         model.addAttribute("categories", categories);
+        model.addAttribute("allTags", allTags);
 
         return "postsForCategory";
     }

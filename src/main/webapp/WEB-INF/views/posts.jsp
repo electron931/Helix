@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:forEach var="post" items="${posts}">
 
@@ -9,7 +10,7 @@
     <p class="lead">
         by <a href="/users/${post.author.id}">${post.author.userName}</a>
     </p>
-    <p><span class="glyphicon glyphicon-time"></span> Posted on ${post.postedOnDate}</p>
+    <p><span class="glyphicon glyphicon-time"></span> Posted on <fmt:formatDate value="${post.postedOnDate}" pattern="yyyy-MM-dd HH:mm" /></p>
     <hr>
     <img class="img-responsive" src="/resources/img/posts/${post.thumbnail}" alt="Post Image">
     <hr>

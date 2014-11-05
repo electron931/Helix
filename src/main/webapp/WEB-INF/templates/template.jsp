@@ -6,7 +6,8 @@
     <meta charset="utf-8">
     <title>${title}</title>
 
-    <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css" />
+    <%--<link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css" />--%>
+    <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.theme.css" />
 
     <link rel="stylesheet" href="/resources/css/style.css">
 

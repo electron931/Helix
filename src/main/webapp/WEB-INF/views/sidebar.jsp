@@ -14,7 +14,6 @@
                     </button>
                 </span>
         </div>
-        <!-- /.input-group -->
     </div>
 
     <!-- Blog Categories Well -->
@@ -32,7 +31,7 @@
 
                 </ul>
             </div>
-            <!-- /.col-lg-6 -->
+
             <div class="col-lg-6">
                 <ul class="list-unstyled">
 
@@ -44,15 +43,56 @@
 
                 </ul>
             </div>
-            <!-- /.col-lg-6 -->
-        </div>
 
+        </div>
     </div>
 
-    <!-- Side Widget Well -->
+    <!-- Blog Tags Well -->
+    <c:set var="count" scope="session" value="${1}"/>
     <div class="well">
-        <h4>Side Widget Well</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+        <h4>Tags</h4>
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="list-unstyled">
+
+                    <c:forEach var="tag" items="${allTags}" begin="0" step="4">
+                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
+                    </c:forEach>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-3">
+                <ul class="list-unstyled">
+
+                    <c:forEach var="tag" items="${allTags}" begin="1" step="4">
+                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
+                    </c:forEach>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-3">
+                <ul class="list-unstyled">
+
+                    <c:forEach var="tag" items="${allTags}" begin="2" step="4">
+                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
+                    </c:forEach>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-3">
+                <ul class="list-unstyled">
+
+                    <c:forEach var="tag" items="${allTags}" begin="3" step="4">
+                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
+                    </c:forEach>
+
+                </ul>
+            </div>
+
+        </div>
     </div>
 
 </div>

@@ -61,44 +61,16 @@ public class PostController {
         Post post = this.postService.getPostByUrlSlug(postSlug);
         List<Tag> tags = this.postService.getAllTagsForPost(post);
         List<Category> categories = this.categoryService.getAllCategories();
+        List<Tag> allTags = this.tagService.getAllTags();
 
         model.addAttribute("post", post);
         model.addAttribute("title", post.getTitle() + " | Helix");
         model.addAttribute("tags", tags);
         model.addAttribute("categories", categories);
+        model.addAttribute("allTags", allTags);
 
         return "singlePost";
     }
 
-    @RequestMapping(value = "/addAll", method = RequestMethod.GET)
-    //public String test(@RequestParam("category_id") int category_id, Model model) {
-    public String test(Model model) {
-
-
-
-        Category category = this.categoryService.getCategoryById(1);
-        User user = this.userService.getUserById(1);
-
-        List<Tag> tags = this.tagService.getAllTags();
-
-        for (int i = 0; i < 30; i++) {
-            Post post = new Post();
-            post.setTitle("Post" + i);
-            post.setShortDescription("lorem ipsum");
-            post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
-            post.setUrlSlug("post" + i);
-            post.setPublished(true);
-            post.setPostedOnDate(new Date());
-            post.setCategory(category);
-            post.setAuthor(user);
-
-            post.setTags(tags);
-
-            this.postService.addPost(post);
-        }
-
-
-        return "redirect:/";
-    }
 
 }
