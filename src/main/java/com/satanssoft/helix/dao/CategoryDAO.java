@@ -11,7 +11,8 @@ public interface CategoryDAO {
     public void updateCategory(Category category);
     public List<Category> getAllCategories();
     public Category getCategoryById(int category_id);
+    public Category getCategoryByUrlSlug(String categorySlug);
     public void removeCategory(int category_id);
-    public List<Post> getAllPostsForCategory(Category category);
+    public List<Post> getAllPostsForCategory(Category category, int pageNumber, int postsPerPage);
 
 }

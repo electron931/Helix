@@ -45,6 +45,15 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
+    public Category getCategoryByUrlSlug(String categorySlug) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Category category = (Category) session.createCriteria(Category.class)
+                .add(Restrictions.eq("urlSlug", categorySlug))
+                .uniqueResult();
+        return category;
+    }
+
+    @Override
     public void removeCategory(int category_id) {
         Session session = this.sessionFactory.getCurrentSession();
         Category category = (Category) session.get(Category.class, category_id);
@@ -55,10 +64,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Post> getAllPostsForCategory(Category category) {
+    public List<Post> getAllPostsForCategory(Category category, int pageNumber, int postsPerPage) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Post> posts = session.createCriteria(Post.class)
-                .add(Restrictions.like("category", category))
+        List<Post> posts = session.createQuery("from Post as post where post.category = :category")
+                .setEntity("category", category)
+                .setFirstResult((pageNumber - 1) * postsPerPage)
+                .setMaxResults(postsPerPage)
                 .list();
         return posts;
     }

@@ -3,7 +3,7 @@ $( document ).ready(function() {
     $(".loadMorePosts button").click(function() {
         $.ajax({
             type: "POST",
-            url: "/",
+            url: window.location.pathname,
             success: function(data) {
                 console.log(data);
                 $(".postList").append(data);

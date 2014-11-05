@@ -42,13 +42,19 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
+    public Category getCategoryByUrlSlug(String categorySlug) {
+        return this.categoryDAO.getCategoryByUrlSlug(categorySlug);
+    }
+
+    @Override
+    @Transactional
     public void removeCategory(int category_id) {
         this.categoryDAO.removeCategory(category_id);
     }
 
     @Override
     @Transactional
-    public List<Post> getAllPostsForCategory(Category category) {
-        return this.categoryDAO.getAllPostsForCategory(category);
+    public List<Post> getAllPostsForCategory(Category category, int pageNumber, int postsPerPage) {
+        return this.categoryDAO.getAllPostsForCategory(category, pageNumber, postsPerPage);
     }
 }

@@ -5,13 +5,12 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="content">
 
-
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
             <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
+                ${currentCategory.title}
+                <small>${currentCategory.description}</small>
             </h1>
 
             <div class="postList">
@@ -62,19 +61,19 @@
                         </ul>
                     </div>
                     <!-- /.col-lg-6 -->
-                    <%--<div class="col-lg-6">
-                        <ul class="list-unstyled">
+                        <%--<div class="col-lg-6">
+                            <ul class="list-unstyled">
 
-                                <c:forEach var="category" items="${categories}" varStatus="loopStatus">
-                                    <c:if test="${loopStatus.index % 2 == 0">
+                                    <c:forEach var="category" items="${categories}" varStatus="loopStatus">
+                                        <c:if test="${loopStatus.index % 2 == 0">
 
-                                        <li><a href="#">${category.title}</a></li>
+                                            <li><a href="#">${category.title}</a></li>
 
-                                    </c:if>
-                                </c:forEach>
+                                        </c:if>
+                                    </c:forEach>
 
-                        </ul>
-                    </div>--%>
+                            </ul>
+                        </div>--%>
                     <!-- /.col-lg-6 -->
                 </div>
                 <!-- /.row -->
