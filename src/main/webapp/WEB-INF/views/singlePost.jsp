@@ -15,7 +15,7 @@
 
             <!-- Author -->
             <p class="lead">
-                by <a href="/users/${post.author.id}">${post.author.userName}</a>
+                by <a href="/user/${post.author.id}">${post.author.userName}</a>
             </p>
 
             <hr>
@@ -39,7 +39,7 @@
 
             <div class="tags">
                 <c:forEach var="tag" items="${tags}">
-                    <a href="/tags/${tag.urlSlug}" class="label label-info">${tag.name}</a>
+                    <a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a>
                 </c:forEach>
             </div>
 

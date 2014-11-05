@@ -42,14 +42,20 @@ public class TagServiceImpl implements TagService {
 
     @Override
     @Transactional
+    public Tag getTagByUrlSlug(String tagSlug) {
+        return this.tagDAO.getTagByUrlSlug(tagSlug);
+    }
+
+    @Override
+    @Transactional
     public void removeTag(int tag_id) {
         this.tagDAO.removeTag(tag_id);
     }
 
     @Override
     @Transactional
-    public List<Post> getAllPostsForTag(Tag tag) {
-        return this.tagDAO.getAllPostsForTag(tag);
+    public List<Post> getAllPostsForTag(Tag tag, int pageNumber, int postsPerPage) {
+        return this.tagDAO.getAllPostsForTag(tag, pageNumber, postsPerPage);
     }
 
 }

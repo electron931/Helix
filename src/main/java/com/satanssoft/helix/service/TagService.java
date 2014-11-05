@@ -11,7 +11,8 @@ public interface TagService {
     public void updateTag(Tag tag);
     public List<Tag> getAllTags();
     public Tag getTagById(int tag_id);
+    public Tag getTagByUrlSlug(String tagSlug);
     public void removeTag(int tag_id);
-    public List<Post> getAllPostsForTag(Tag tag);
+    public List<Post> getAllPostsForTag(Tag tag, int pageNumber, int postsPerPage);
 
 }

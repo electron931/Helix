@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -43,9 +45,9 @@ public class CategoryController {
     }
 
     @Autowired(required = true)
-    @Qualifier(value = "categoryService")
-    public void setPostService(CategoryService categoryService){
-        this.categoryService = categoryService;
+    @Qualifier(value = "postService")
+    public void setPostService(PostService postService){
+        this.postService = postService;
     }
 
     @Autowired(required = true)
@@ -93,16 +95,21 @@ public class CategoryController {
         return "posts";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/setup", method = RequestMethod.GET)
     //public String test(@RequestParam("category_id") int category_id, Model model) {
-    public String test(Model model) {
+    public String setup(Model model) {
 
-        /*Category category = new Category();
-        category.setTitle("News");
-        category.setDescription("Awesome news");
-        category.setUrlSlug("news");
+        Category category1 = new Category();
+        category1.setTitle("News");
+        category1.setDescription("Awesome news");
+        category1.setUrlSlug("news");
+        this.categoryService.addCategory(category1);
 
-        this.categoryService.addCategory(category);
+        Category category2 = new Category();
+        category2.setTitle("Games");
+        category2.setDescription("Games are the future");
+        category2.setUrlSlug("games");
+        this.categoryService.addCategory(category2);
 
 
         User user = new User();
@@ -113,18 +120,43 @@ public class CategoryController {
         this.userService.addUser(user);
 
 
-        Tag tag1 = new Tag();
-        tag1.setName("news");
-        tag1.setUrlSlug("news");
-        this.tagService.addTag(tag1);
+        for (int i = 1; i <= 5; i++) {
+            Tag tag = new Tag();
+            tag.setName("tag" + i);
+            tag.setUrlSlug("tag" + i);
+            this.tagService.addTag(tag);
+        }
 
-        Tag tag2 = new Tag();
-        tag2.setName("awesome");
-        tag2.setUrlSlug("awesome");
-        this.tagService.addTag(tag2);*/
+        List<Tag> tags = this.tagService.getAllTags();
 
-        /*this.categoryService.removeCategory(category_id);
-        System.out.println("Category deleted!");*/
+        for (int i = 1; i <= 30; i++) {
+            Post post = new Post();
+            post.setTitle("Post" + i);
+            post.setShortDescription("lorem ipsum" + i);
+            post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
+            post.setUrlSlug("post" + i);
+            post.setPublished(true);
+            post.setPostedOnDate(new Date());
+
+            if (i % 2 == 0) {
+                post.setCategory(this.categoryService.getCategoryById(1));
+            }
+            else {
+                post.setCategory(this.categoryService.getCategoryById(2));
+            }
+
+            post.setAuthor(user);
+
+            if (i % 2 == 0) {
+                post.setTags(tags.subList(1, 3));
+            }
+            else {
+                post.setTags(tags);
+            }
+
+
+            this.postService.addPost(post);
+        }
 
         return "redirect:/";
     }

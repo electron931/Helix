@@ -47,6 +47,15 @@ public class TagDAOImpl implements TagDAO {
     }
 
     @Override
+    public Tag getTagByUrlSlug(String tagSlug) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Tag tag = (Tag) session.createCriteria(Tag.class)
+                .add(Restrictions.eq("urlSlug", tagSlug))
+                .uniqueResult();
+        return tag;
+    }
+
+    @Override
     public void removeTag(int tag_id) {
         Session session = this.sessionFactory.getCurrentSession();
         Tag tag = (Tag) session.get(Tag.class, tag_id);
@@ -57,11 +66,13 @@ public class TagDAOImpl implements TagDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Post> getAllPostsForTag(Tag tag) {
+    public List<Post> getAllPostsForTag(Tag tag, int pageNumber, int postsPerPage) {
         String hql = "select u from Post u inner join u.tags r where r.id =:id";
         Session session = this.sessionFactory.getCurrentSession();
         List<Post> posts = session.createQuery(hql)
                 .setInteger("id", tag.getId())
+                .setFirstResult((pageNumber - 1) * postsPerPage)
+                .setMaxResults(postsPerPage)
                 .list();
         return posts;
     }
