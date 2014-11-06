@@ -24,18 +24,8 @@ public class Comment {
     @Type(type = "text")
     private String userName;
 
-    @Column(name = "likesCount", nullable = false)
-    private int likesCount;
-
-    @Column(name = "dislikesCount", nullable = false)
-    private int dislikesCount;
-
     @Column(name = "createdDate", nullable = false)
     private Date createdDate;
-
-    @Column(name = "parentCommentId", nullable = true)
-    @Type(type = "int")
-    private Comment parentComment;
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
@@ -66,22 +56,6 @@ public class Comment {
         this.userName = userName;
     }
 
-    public int getLikesCount() {
-        return likesCount;
-    }
-
-    public void setLikesCount(int likesCount) {
-        this.likesCount = likesCount;
-    }
-
-    public int getDislikesCount() {
-        return dislikesCount;
-    }
-
-    public void setDislikesCount(int dislikesCount) {
-        this.dislikesCount = dislikesCount;
-    }
-
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -98,11 +72,4 @@ public class Comment {
         this.post = post;
     }
 
-    public Comment getParentComment() {
-        return parentComment;
-    }
-
-    public void setParentComment(Comment parentComment) {
-        this.parentComment = parentComment;
-    }
 }
