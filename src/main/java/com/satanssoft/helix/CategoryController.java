@@ -16,11 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
+
 
 @Controller
 @RequestMapping(value = "/category")
@@ -37,6 +37,7 @@ public class CategoryController {
     private UserService userService;
     private TagService tagService;
     private PostService postService;
+
 
     @Autowired(required = true)
     @Qualifier(value = "categoryService")
@@ -84,6 +85,7 @@ public class CategoryController {
         return "postsForCategory";
     }
 
+
     @RequestMapping(value = "/{categorySlug}", method = RequestMethod.POST)
     public String loadMorePosts(Model model, @PathVariable("categorySlug") String categorySlug) {
 
@@ -97,6 +99,7 @@ public class CategoryController {
 
         return "posts";
     }
+
 
     @RequestMapping(value = "/setup", method = RequestMethod.GET)
     //public String test(@RequestParam("category_id") int category_id, Model model) {

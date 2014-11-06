@@ -1,6 +1,5 @@
 package com.satanssoft.helix;
 
-
 import com.satanssoft.helix.hibernate.model.Category;
 import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.hibernate.model.Tag;
@@ -14,11 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import java.util.List;
-
 
 
 @Controller
@@ -32,6 +28,7 @@ public class HomeController {
     private PostService postService;
     private CategoryService categoryService;
     private TagService tagService;
+
 
     @Autowired(required = true)
     @Qualifier(value = "postService")
@@ -51,9 +48,9 @@ public class HomeController {
         this.tagService = tagService;
     }
 
+
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String home(Model model) {
-
         pageNumber = 1;
 
         List<Post> posts = this.postService.getPostsForPage(pageNumber, POSTS_PER_PAGE);
@@ -72,13 +69,10 @@ public class HomeController {
 
     @RequestMapping(value = {"/"}, method = RequestMethod.POST)
     public String loadMorePosts(Model model) {
-
         pageNumber++;
         List<Post> posts = this.postService.getPostsForPage(pageNumber, POSTS_PER_PAGE);
 
-
         model.addAttribute("posts", posts);
-        //model.addAttribute("categories", categories);
 
         return "posts";
     }

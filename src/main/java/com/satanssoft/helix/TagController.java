@@ -4,9 +4,7 @@ import com.satanssoft.helix.hibernate.model.Category;
 import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.hibernate.model.Tag;
 import com.satanssoft.helix.service.CategoryService;
-import com.satanssoft.helix.service.PostService;
 import com.satanssoft.helix.service.TagService;
-import com.satanssoft.helix.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+
 
 @Controller
 @RequestMapping(value = "/tag")
@@ -30,26 +29,13 @@ public class TagController {
     private Tag tag;
 
     private CategoryService categoryService;
-    private UserService userService;
     private TagService tagService;
-    private PostService postService;
+
 
     @Autowired(required = true)
     @Qualifier(value = "categoryService")
     public void setCategoryService(CategoryService categoryService){
         this.categoryService = categoryService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "categoryService")
-    public void setPostService(CategoryService categoryService){
-        this.categoryService = categoryService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "userService")
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 
     @Autowired(required = true)
@@ -82,14 +68,12 @@ public class TagController {
 
     @RequestMapping(value = "/{tagSlug}", method = RequestMethod.POST)
     public String loadMorePosts(Model model, @PathVariable("tagSlug") String tagSlug) {
-
         pageNumber++;
         List<Post> posts = this.tagService
                 .getAllPostsForTag(tag, pageNumber, POSTS_PER_PAGE);
 
 
         model.addAttribute("posts", posts);
-        //model.addAttribute("categories", categories);
 
         return "posts";
     }

@@ -3,7 +3,6 @@ package com.satanssoft.helix;
 import com.satanssoft.helix.hibernate.model.Category;
 import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.hibernate.model.Tag;
-import com.satanssoft.helix.hibernate.model.User;
 import com.satanssoft.helix.service.CategoryService;
 import com.satanssoft.helix.service.PostService;
 import com.satanssoft.helix.service.TagService;
@@ -15,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
+
 
 @Controller
 @RequestMapping(value = "/posts")
@@ -28,6 +27,7 @@ public class PostController {
     private CategoryService categoryService;
     private TagService tagService;
     private UserService userService;
+
 
     @Autowired(required = true)
     @Qualifier(value = "postService")
