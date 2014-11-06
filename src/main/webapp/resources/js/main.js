@@ -1,12 +1,22 @@
 $( document ).ready(function() {
 
-    $(".loadMorePosts button").click(function() {
+    var isEmpty = false;
+    var loadMorePostsButton = $(".loadMorePosts button");
+
+    loadMorePostsButton.click(function() {
         $.ajax({
             type: "POST",
             url: window.location.pathname,
             success: function(data) {
-                console.log(data);
-                $(".postList").append(data);
+                console.log($.trim(data));
+                if ($.trim(data) == "") {
+                    isEmpty = true;
+                    loadMorePostsButton.prop("disabled", true);
+                }
+                else {
+                    $(".postList").append(data);
+                    isEmpty = false;
+                }
             },
             fail: function() {
                 console.log('error');
@@ -16,9 +26,15 @@ $( document ).ready(function() {
 
 
     $(document).ajaxStart(function () {
-        $(".loadMorePosts button").html("Loading...");
+        loadMorePostsButton.html("Loading...");
     }).ajaxStop(function () {
-        $(".loadMorePosts button").html("More Posts");
+        if (isEmpty) {
+            loadMorePostsButton.html("No More Posts");
+        }
+        else {
+            loadMorePostsButton.html("More Posts");
+        }
+
     });
 
 

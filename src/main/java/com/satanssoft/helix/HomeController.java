@@ -22,7 +22,7 @@ public class HomeController {
 
     private static final Logger logger = Logger.getLogger(HomeController.class);
 
-    private int POSTS_PER_PAGE = 10;
+    private static final int POSTS_PER_PAGE = 10;
     private int pageNumber;
 
     private PostService postService;
@@ -73,6 +73,13 @@ public class HomeController {
         List<Post> posts = this.postService.getPostsForPage(pageNumber, POSTS_PER_PAGE);
 
         model.addAttribute("posts", posts);
+
+        if (posts.size() == 0) {
+            model.addAttribute("isEmpty", true);
+        }
+        else {
+            model.addAttribute("isEmpty", false);
+        }
 
         return "posts";
     }

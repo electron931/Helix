@@ -23,6 +23,10 @@ public class PostController {
 
     private static final Logger logger = Logger.getLogger(PostController.class);
 
+    private static final int POSTS_PER_PAGE = 10;
+    private int pageNumber;
+    private String search;
+
     private PostService postService;
     private CategoryService categoryService;
     private TagService tagService;
@@ -70,6 +74,44 @@ public class PostController {
         model.addAttribute("allTags", allTags);
 
         return "singlePost";
+    }
+
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String search(Model model, @RequestParam("search") String search) {
+        pageNumber = 1;
+        this.search = search;
+
+        List<Post> posts = this.postService.getAllPostsForSearch(search, pageNumber, POSTS_PER_PAGE);
+        List<Category> categories = this.categoryService.getAllCategories();
+        List<Tag> allTags =  this.tagService.getAllTags();
+
+        model.addAttribute("search", search);
+        model.addAttribute("posts", posts);
+        model.addAttribute("title", "Search | Helix");
+        model.addAttribute("categories", categories);
+        model.addAttribute("allTags", allTags);
+
+        if (posts.size() == 0) {
+            model.addAttribute("isEmpty", true);
+        }
+        else {
+            model.addAttribute("isEmpty", false);
+        }
+
+        return "postsForSearch";
+    }
+
+    @RequestMapping(value = {""}, method = RequestMethod.POST)
+    public String loadMorePosts(Model model) {
+        pageNumber++;
+        List<Post> posts = this.postService.getAllPostsForSearch(this.search,
+                pageNumber,
+                POSTS_PER_PAGE);
+
+        model.addAttribute("posts", posts);
+
+        return "posts";
     }
 
 

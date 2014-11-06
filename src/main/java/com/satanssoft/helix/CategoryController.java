@@ -82,6 +82,13 @@ public class CategoryController {
         model.addAttribute("categories", categories);
         model.addAttribute("allTags", allTags);
 
+        if (posts.size() == 0) {
+            model.addAttribute("isEmpty", true);
+        }
+        else {
+            model.addAttribute("isEmpty", false);
+        }
+
         return "postsForCategory";
     }
 

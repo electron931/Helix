@@ -51,6 +51,22 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
+    public List<Post> getAllPostsForSearch(String search, int pageNumber, int postsPerPage) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Post> posts = session.createQuery("from Post where title like :title or " +
+                "shortDescription like :shortDescription or " +
+                "description like :description")
+                .setString("title", "%" + search + "%")
+                .setString("shortDescription", "%" + search + "%")
+                .setString("description", "%" + search + "%")
+                .setFirstResult( (pageNumber - 1) * postsPerPage )
+                .setMaxResults(postsPerPage)
+                .list();
+        return posts;
+    }
+
+    @Override
     public Post getPostById(int post_id) {
         Session session = this.sessionFactory.getCurrentSession();
         Post post = (Post) session.get(Post.class, post_id);

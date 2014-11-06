@@ -14,9 +14,17 @@
                 <small>Secondary Text</small>
             </h1>
 
-            <div class="postList">
-                <jsp:include page="posts.jsp" />
-            </div>
+            <c:choose>
+                <c:when test="${isEmpty}">
+                    <p>There is no post available</p>
+                </c:when>
+
+                <c:otherwise>
+                    <div class="postList">
+                        <jsp:include page="posts.jsp" />
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
 
             <!-- Pager -->

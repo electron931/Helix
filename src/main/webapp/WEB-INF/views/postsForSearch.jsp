@@ -9,8 +9,7 @@
         <div class="col-md-8">
 
             <h1 class="page-header">
-                ${currentCategory.title}
-                <small>${currentCategory.description}</small>
+                    Search for: ${search}
             </h1>
 
             <c:choose>
@@ -22,14 +21,14 @@
                     <div class="postList">
                         <jsp:include page="posts.jsp" />
                     </div>
+
+                    <!-- Pager -->
+                    <div class="loadMorePosts">
+                        <button type="button" class="btn btn-info">More Posts</button>
+                    </div>
                 </c:otherwise>
             </c:choose>
 
-
-            <!-- Pager -->
-            <div class="loadMorePosts">
-                <button type="button" class="btn btn-info">More Posts</button>
-            </div>
 
         </div>
 
