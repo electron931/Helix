@@ -18,8 +18,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void addComment(Comment comment) {
-        this.commentDAO.addComment(comment);
+    public int addComment(Comment comment) {
+        return this.commentDAO.addComment(comment);
     }
 
     @Override

@@ -20,6 +20,10 @@ public class Comment {
     @Type(type = "text")
     private String text;
 
+    @Column(name = "userName", nullable = false)
+    @Type(type = "text")
+    private String userName;
+
     @Column(name = "likesCount", nullable = false)
     private int likesCount;
 
@@ -29,16 +33,9 @@ public class Comment {
     @Column(name = "createdDate", nullable = false)
     private Date createdDate;
 
-    @Column(name = "modifiedDate", nullable = true)
-    private Date modifiedDate;
-
     @Column(name = "parentCommentId", nullable = true)
     @Type(type = "int")
     private Comment parentComment;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
@@ -59,6 +56,14 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getLikesCount() {
@@ -83,22 +88,6 @@ public class Comment {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Post getPost() {

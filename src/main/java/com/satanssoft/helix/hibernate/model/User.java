@@ -29,8 +29,6 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
 
 
     public int getId() {
@@ -77,11 +75,4 @@ public class User {
         this.posts = posts;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 }

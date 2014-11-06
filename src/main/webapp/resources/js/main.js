@@ -34,7 +34,6 @@ $( document ).ready(function() {
         else {
             loadMorePostsButton.html("More Posts");
         }
-
     });
 
 

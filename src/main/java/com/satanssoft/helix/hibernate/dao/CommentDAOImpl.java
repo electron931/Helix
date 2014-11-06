@@ -18,9 +18,10 @@ public class CommentDAOImpl implements CommentDAO {
     }
 
     @Override
-    public void addComment(Comment comment) {
+    public int addComment(Comment comment) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.persist(comment);
+        int id = (Integer) session.save(comment);
+        return id;
     }
 
     @Override

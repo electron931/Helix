@@ -34,3 +34,15 @@ body > .container {
 .infoText {
     margin-bottom: 20px;
 }
+
+.well {
+    margin-top: 20px;
+}
+
+.commentName {
+    margin-bottom: 20px;
+}
+
+.comments {
+    margin-bottom: 40px;
+}

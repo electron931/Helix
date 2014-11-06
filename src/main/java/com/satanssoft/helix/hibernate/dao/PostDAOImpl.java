@@ -92,8 +92,14 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Comment> getAllCommentsForPost(Post post) {
-        return null;
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Comment> comments = session.createQuery("from Comment as comment" +
+                " where comment.post = :post")
+                .setEntity("post", post)
+                .list();
+        return comments;
     }
 
     @Override
