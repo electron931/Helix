@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<Post> getAllUserPosts(User user) {
-        return this.userDAO.getAllUserPosts(user);
+    public List<Post> getAllUserPosts(User user, int pageNumber, int postsPerPage) {
+        return this.userDAO.getAllUserPosts(user, pageNumber, postsPerPage);
     }
 }

@@ -30,7 +30,6 @@ public class PostController {
     private PostService postService;
     private CategoryService categoryService;
     private TagService tagService;
-    private UserService userService;
 
 
     @Autowired(required = true)
@@ -50,12 +49,6 @@ public class PostController {
     @Qualifier(value = "tagService")
     public void setTagService(TagService tagService) {
         this.tagService = tagService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "userService")
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 
 

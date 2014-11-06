@@ -55,10 +55,12 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Post> getAllUserPosts(User user) {
+    public List<Post> getAllUserPosts(User user, int pageNumber, int postsPerPage) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Post> posts = session.createCriteria(Post.class)
-                .add(Restrictions.like("author", user))
+        List<Post> posts = session.createQuery("from Post as post where post.author = :author")
+                .setEntity("author", user)
+                .setFirstResult((pageNumber - 1) * postsPerPage)
+                .setMaxResults(postsPerPage)
                 .list();
         return posts;
     }

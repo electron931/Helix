@@ -12,6 +12,6 @@ public interface UserDAO {
     public List<User> getAllUsers();
     public User getUserById(int user_id);
     public void removeUser(int user_id);
-    public List<Post> getAllUserPosts(User user);
+    public List<Post> getAllUserPosts(User user, int pageNumber, int postsPerPage);
 
 }

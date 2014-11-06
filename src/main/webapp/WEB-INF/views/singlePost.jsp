@@ -16,7 +16,7 @@
 
             <!-- Author -->
             <p class="lead">
-                by <a href="/user/${post.author.id}">${post.author.userName}</a>
+                by <a href="/users/${post.author.id}">${post.author.userName}</a>
             </p>
 
             <hr>
