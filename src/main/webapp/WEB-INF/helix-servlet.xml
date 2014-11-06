@@ -4,9 +4,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <mvc:annotation-driven />
 
@@ -98,11 +106,43 @@
         <property name="commentDAO" ref="commentDAO" />
     </bean>
 
+    <bean id="roleDAO" class="com.satanssoft.helix.hibernate.dao.RoleDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <bean id="roleService" class="com.satanssoft.helix.service.impl.RoleServiceImpl">
+        <property name="roleDAO" ref="roleDAO" />
+    </bean>
+
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </bean>
+
+
+    <!-- Spring Security -->
+
+    <security:http auto-config="true" use-expressions="false">
+
+        <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+
+        <security:form-login login-processing-url="/process-login"
+                    login-page="/login"
+                    default-target-url="/success-login"
+                    authentication-failure-url="/error-login"/>
+
+        <security:logout logout-url="/logout"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userServiceSec" />
+    </security:authentication-manager>
+
+    <security:user-service id="userServiceSec">
+        <security:user name="habuma" password="letmein"
+              authorities="ROLE_ADMIN"/>
+    </security:user-service>
+
 
 </beans>

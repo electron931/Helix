@@ -1,13 +1,7 @@
 package com.satanssoft.helix;
 
-import com.satanssoft.helix.hibernate.model.Category;
-import com.satanssoft.helix.hibernate.model.Post;
-import com.satanssoft.helix.hibernate.model.Tag;
-import com.satanssoft.helix.hibernate.model.User;
-import com.satanssoft.helix.service.CategoryService;
-import com.satanssoft.helix.service.PostService;
-import com.satanssoft.helix.service.TagService;
-import com.satanssoft.helix.service.UserService;
+import com.satanssoft.helix.hibernate.model.*;
+import com.satanssoft.helix.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,6 +31,7 @@ public class CategoryController {
     private UserService userService;
     private TagService tagService;
     private PostService postService;
+    private RoleService roleService;
 
 
     @Autowired(required = true)
@@ -61,6 +56,12 @@ public class CategoryController {
     @Qualifier(value = "tagService")
     public void setTagService(TagService tagService) {
         this.tagService = tagService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "roleService")
+    public void setTagService(RoleService roleService) {
+        this.roleService = roleService;
     }
 
 
@@ -124,12 +125,15 @@ public class CategoryController {
         category2.setUrlSlug("games");
         this.categoryService.addCategory(category2);
 
+        Role role = new Role();
+        role.setRole("admin");
+        this.roleService.addRole(role);
 
         User user = new User();
         user.setUserName("Alex");
         user.setPassword("12345");
         user.setEmail("alex@gmail.com");
-        user.setType("author");
+        user.setRole(role);
         this.userService.addUser(user);
 
 

@@ -23,8 +23,9 @@ public class User {
     @Column(name = "email", length = 50, unique = true, nullable = false)
     private String email;
 
-    @Column(name = "type", length = 10, nullable = false)
-    private String type;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
@@ -59,12 +60,12 @@ public class User {
         this.email = email;
     }
 
-    public String getType() {
-        return type;
+    public Role getRole() {
+        return role;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public List<Post> getPosts() {
