@@ -226,3 +226,9 @@ ul.alert-dropdown {
 .adminBlock {
     margin-bottom: 40px;
 }
+
+.deletePost {
+    display: inline-block;
+    color: #93c54b;
+    cursor: pointer;
+}

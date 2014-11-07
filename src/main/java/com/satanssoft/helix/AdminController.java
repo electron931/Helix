@@ -175,4 +175,14 @@ public class AdminController {
     }
 
 
+    @RequestMapping(value = {"/deletePost"}, method = RequestMethod.POST)
+    public String deletePost(Model model, @RequestParam("postId") int postId) {
+        this.postService.removePost(postId);
+
+        model.addAttribute("isPostDeleted", "yes");
+
+        return "redirect:/admin/posts";
+    }
+
+
 }
