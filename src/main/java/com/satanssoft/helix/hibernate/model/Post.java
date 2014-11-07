@@ -35,9 +35,6 @@ public class Post {
     @Column(name = "thumbnail", nullable = true)
     private String thumbnail;
 
-    @Column(name = "isPublished", nullable = false)
-    private boolean isPublished;
-
     @Column(name = "postedOnDate", nullable = false)
     private Date postedOnDate;
 
@@ -54,8 +51,6 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
-
-
 
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -109,14 +104,6 @@ public class Post {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    public boolean isPublished() {
-        return isPublished;
-    }
-
-    public void setPublished(boolean isPublished) {
-        this.isPublished = isPublished;
     }
 
     public Date getPostedOnDate() {

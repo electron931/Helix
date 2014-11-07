@@ -154,7 +154,6 @@ public class CategoryController {
             post.setShortDescription("lorem ipsum" + i);
             post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
             post.setUrlSlug("post" + i);
-            post.setPublished(true);
             post.setPostedOnDate(new Date());
             post.setThumbnail("pic" + imageCounter++ + ".jpg");
 

@@ -8,7 +8,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Helix Admin</a>
+        <a class="navbar-brand" href="/admin/dashboard">Helix Admin</a>
+        <a class="navbar-brand" href="/">Back to Blog</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -40,7 +41,15 @@
                 <a href="/admin/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Posts</a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="demo" class="collapse">
+                    <li>
+                        <a href="/admin/addPost">Add Post</a>
+                    </li>
+                    <li>
+                        <a href="/admin/posts">All Posts</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="tables.html"><i class="fa fa-fw fa-table"></i> Categories</a>
