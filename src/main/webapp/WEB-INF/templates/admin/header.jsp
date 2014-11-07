@@ -46,7 +46,15 @@
                 </ul>
             </li>
             <li>
-                <a href="tables.html"><i class="fa fa-fw fa-table"></i> Categories</a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i> Categories <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="demo2" class="collapse">
+                    <li>
+                        <a href="/admin/addCategory">Add Category</a>
+                    </li>
+                    <li>
+                        <a href="/admin/categories">All Categories</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Tags</a>

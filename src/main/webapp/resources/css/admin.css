@@ -227,7 +227,7 @@ ul.alert-dropdown {
     margin-bottom: 40px;
 }
 
-.deletePost {
+.deletePost, .deleteCategory {
     display: inline-block;
     color: #93c54b;
     cursor: pointer;

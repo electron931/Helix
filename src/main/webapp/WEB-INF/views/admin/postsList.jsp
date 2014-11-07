@@ -8,6 +8,7 @@
     <thead>
     <tr>
       <th>Title</th>
+      <th>Category</th>
       <th>Short Description</th>
       <th>Published</th>
       <th>Modified</th>
@@ -22,6 +23,7 @@
       <!-- Blog Post -->
       <tr id="post${post.id}">
         <td><a href="/admin/posts/${post.urlSlug}">${post.title}</a></td>
+        <td>${post.category.title}</td>
         <td>${post.shortDescription}</td>
         <td><fmt:formatDate value="${post.postedOnDate}" pattern="yyyy-MM-dd HH:mm" /></td>
         <td><fmt:formatDate value="${post.modifiedDate}" pattern="yyyy-MM-dd HH:mm" /></td>
