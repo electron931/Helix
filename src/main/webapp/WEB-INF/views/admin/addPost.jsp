@@ -28,7 +28,7 @@
 
         <div class="form-group">
           <label>Post Body</label>
-          <textarea class="form-control" rows="8" placeholder="Post Body..." name="description"></textarea>
+          <textarea class="form-control" rows="12" placeholder="Post Body..." name="description"></textarea>
         </div>
 
         <div class="form-group">

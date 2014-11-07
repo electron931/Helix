@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,6 +79,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/posts"}, method = RequestMethod.GET)
     public String posts(Model model, @RequestParam(required = false) String isPostCreated,
+                        @RequestParam(required = false) String isPostUpdated,
                         @RequestParam(required = false) String isError) {
         List<Post> posts = this.postService.getAllPosts();
 
@@ -97,6 +99,13 @@ public class AdminController {
         }
         else {
             model.addAttribute("isPostCreated", false);
+        }
+
+        if (isPostUpdated != null && isPostUpdated.equals("yes")) {
+            model.addAttribute("isPostUpdated", true);
+        }
+        else {
+            model.addAttribute("isPostUpdated", false);
         }
 
         if (isError != null && isError.equals("yes")) {
@@ -161,15 +170,17 @@ public class AdminController {
             post.setTags(postTags);
         }
 
+        model.addAttribute("isPostCreated", "yes");
 
         try {
             this.postService.addPost(post);
         }
         catch (Exception e) {
             model.addAttribute("isError", "yes");
+            model.addAttribute("isPostCreated", "no");
         }
 
-        model.addAttribute("isPostCreated", "yes");
+
 
         return "redirect:/admin/posts";
     }
@@ -179,7 +190,83 @@ public class AdminController {
     public String deletePost(Model model, @RequestParam("postId") int postId) {
         this.postService.removePost(postId);
 
-        model.addAttribute("isPostDeleted", "yes");
+        return "redirect:/admin/posts";
+    }
+
+
+    @RequestMapping(value = {"/posts/{postSlug}"}, method = RequestMethod.GET)
+    public String updatePostView(Model model, @PathVariable("postSlug") String postSlug) {
+
+        List<Category> categories = this.categoryService.getAllCategories();
+        List<Tag> tags = this.tagService.getAllTags();
+        Post post = this.postService.getPostByUrlSlug(postSlug);
+        List<Tag> postTags = this.postService.getAllTagsForPost(post);
+
+        model.addAttribute("post", post);
+        model.addAttribute("categories", categories);
+        model.addAttribute("tags", tags);
+        model.addAttribute("postTags", postTags);
+        model.addAttribute("title", "Admin | Helix");
+
+        return "admin/updatePost";
+    }
+
+
+    @RequestMapping(value = {"/updatePost"}, method = RequestMethod.POST)
+    public String updatePost(Model model, @RequestParam("title") String title,
+                                          @RequestParam("shortDescription") String shortDescription,
+                                          @RequestParam("description") String description,
+                                          @RequestParam("thumbnail") String thumbnail,
+                                          @RequestParam(required = false) String tags,
+                                          @RequestParam("category") String category,
+                                          @RequestParam("author") String author,
+                                          @RequestParam("postId") int postId) {
+
+        List<String> tagsIds = null;
+        if (tags != null) {
+            tagsIds = new ArrayList<String>(Arrays.asList(tags.split(",")));
+        }
+
+        Post post = new Post();
+        post.setId(postId);
+        post.setTitle(title);
+        post.setShortDescription(shortDescription);
+        post.setDescription(description);
+        post.setUrlSlug(title.replaceAll(" ", "_").toLowerCase());
+
+        Post oldPost = this.postService.getPostById(postId);
+        post.setPostedOnDate(oldPost.getPostedOnDate());
+        post.setModifiedDate(new Date());
+
+        post.setThumbnail(thumbnail);
+
+        Category postCategory = this.categoryService.getCategoryById(Integer.valueOf(category));
+        post.setCategory(postCategory);
+
+        User user = this.userService.getUserByName(author);
+        post.setAuthor(user);
+
+        if (tagsIds != null) {
+            List<Tag> postTags = new ArrayList<Tag>();
+            for (String tagId : tagsIds) {
+                Tag tag = this.tagService.getTagById(Integer.valueOf(tagId));
+                postTags.add(tag);
+            }
+
+            post.setTags(postTags);
+        }
+
+
+        model.addAttribute("isPostUpdated", "yes");
+
+        try {
+            this.postService.updatePost(post);
+        }
+        catch (Exception e) {
+            model.addAttribute("isError", "yes");
+            model.addAttribute("isPostUpdated", "no");
+        }
+
 
         return "redirect:/admin/posts";
     }

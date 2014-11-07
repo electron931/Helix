@@ -12,13 +12,19 @@
 
       <c:if test="${isPostCreated}">
         <div class="alert alert-success">
-          Post has been created.
+          Post has been saved.
+        </div>
+      </c:if>
+
+      <c:if test="${isPostUpdated}">
+        <div class="alert alert-success">
+          Post has been updated.
         </div>
       </c:if>
 
       <c:if test="${isError}">
         <div class="alert alert-danger">
-          Error occurred while saving the post
+          Error occurred while saving/updating the post.
         </div>
       </c:if>
 

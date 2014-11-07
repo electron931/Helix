@@ -10,6 +10,7 @@
       <th>Title</th>
       <th>Short Description</th>
       <th>Published</th>
+      <th>Modified</th>
       <th>Author</th>
       <th></th>
     </tr>
@@ -23,6 +24,7 @@
         <td><a href="/admin/posts/${post.urlSlug}">${post.title}</a></td>
         <td>${post.shortDescription}</td>
         <td><fmt:formatDate value="${post.postedOnDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+        <td><fmt:formatDate value="${post.modifiedDate}" pattern="yyyy-MM-dd HH:mm" /></td>
         <td><a href="/admin/users/${post.author.id}">${post.author.userName}</a></td>
         <td><span class="deletePost" id="${post.id}">Delete</span></td>
       </tr>
