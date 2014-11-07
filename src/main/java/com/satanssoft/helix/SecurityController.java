@@ -17,12 +17,6 @@ public class SecurityController {
         return "login";
     }
 
-    /*@RequestMapping(value = {"/process-login"}, method = RequestMethod.POST)
-    @ResponseBody
-    public String processLogin(Model model) {
-
-        return "process-login";
-    }*/
 
     @RequestMapping(value = {"/success-login"}, method = RequestMethod.GET)
     @ResponseBody
@@ -31,12 +25,5 @@ public class SecurityController {
         return "success-login";
     }
 
-
-    /*@RequestMapping(value = {"/error-login"}, method = RequestMethod.GET)
-    @ResponseBody
-    public String errorLogin(Model model) {
-
-        return "error-login";
-    }*/
 
 }

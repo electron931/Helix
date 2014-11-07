@@ -82,3 +82,30 @@ body > .container {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.adminHeader {
+    width: 100%;
+
+    background-color: #0F7FB4;
+    padding: 5px;
+}
+
+.adminHeader .welcome {
+    font-size: 18px;
+    color: #fff;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.insideHeader {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.adminHeader .adminLinks {
+    float: right;
+    font-size: 18px;
+    color: #fff;
+    margin: 0 15px;
+}
+

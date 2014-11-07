@@ -1,4 +1,23 @@
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags" %>
+
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+    <sec:authorize access="hasRole('ROLE_MODERATOR')">
+
+        <div class="adminHeader">
+            <div class="insideHeader">
+                <span class="welcome">Hello, <sec:authentication property="principal.username" />!</span>
+                <a href="/admin/logout" class="adminLinks">Logout</a>
+                <a href="/admin" class="adminLinks">Go to Admin</a>
+            </div>
+        </div>
+
+
+    </sec:authorize>
+
+
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

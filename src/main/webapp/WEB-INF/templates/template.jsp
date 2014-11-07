@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
 <html>
@@ -21,6 +23,15 @@
     <script src="/resources/js/main.js"></script>
 </head>
 <body>
+
+    <sec:authorize access="hasRole('ROLE_MODERATOR')">
+        <style>
+            body > .container {
+                padding: 95px 15px 0;
+            }
+        </style>
+    </sec:authorize>
+
     <header>
         <tiles:insertAttribute name="header" />
     </header>

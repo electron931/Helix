@@ -7,7 +7,7 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="content">
 
-        <c:url value="/admin/process-login" var="loginUrl" />
+        <c:url value="/process-login" var="loginUrl" />
 
         <form class="form-signin" role="form" action="${loginUrl}" method="post">
             <h2 class="form-signin-heading">Please sign in</h2>

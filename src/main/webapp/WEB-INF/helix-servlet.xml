@@ -143,6 +143,7 @@
 
     <bean id="customUserDetails" class="com.satanssoft.helix.CustomUserDetailsService"></bean>
 
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 
 
 </beans>
