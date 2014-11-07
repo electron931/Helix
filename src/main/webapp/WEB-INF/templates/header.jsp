@@ -1,9 +1,9 @@
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags" %>
 
-
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
+    
     <sec:authorize access="hasRole('ROLE_MODERATOR')">
 
         <div class="adminHeader">
@@ -13,7 +13,6 @@
                 <a href="/admin" class="adminLinks">Go to Admin</a>
             </div>
         </div>
-
 
     </sec:authorize>
 
