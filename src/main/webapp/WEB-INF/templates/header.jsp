@@ -3,14 +3,14 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
-    
+
     <sec:authorize access="hasRole('ROLE_MODERATOR')">
 
         <div class="adminHeader">
             <div class="insideHeader">
                 <span class="welcome">Hello, <sec:authentication property="principal.username" />!</span>
-                <a href="/admin/logout" class="adminLinks">Logout</a>
-                <a href="/admin" class="adminLinks">Go to Admin</a>
+                <a href="/logout" class="adminLinks">Logout</a>
+                <a href="/admin/dashboard" class="adminLinks">Go to Admin</a>
             </div>
         </div>
 

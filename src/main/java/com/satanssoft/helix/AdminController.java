@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdminController {
 
     @RequestMapping(value = {""}, method = RequestMethod.GET)
-    @ResponseBody
     public String admin(Model model) {
 
-
-        return "admin";
+        return "redirect:admin/dashboard";
     }
 
+    @RequestMapping(value = {"/dashboard"}, method = RequestMethod.GET)
+    public String dashboard(Model model) {
+
+        model.addAttribute("title", "Admin | Helix");
+
+        return "admin/dashboard";
+    }
 
 
 }

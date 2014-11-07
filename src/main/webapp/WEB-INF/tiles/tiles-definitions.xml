@@ -15,5 +15,15 @@
     </definition>
 
 
+    <definition name="adminTemplate"
+                template="/WEB-INF/templates/admin/template.jsp">
+
+        <put-attribute name="adminTitle" expression="${title}"/>
+
+        <put-attribute name="adminHeader" value="/WEB-INF/templates/admin/header.jsp" />
+
+    </definition>
+
+
 
 </tiles-definitions>
