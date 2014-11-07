@@ -130,19 +130,19 @@
         <security:form-login login-processing-url="/process-login"
                     login-page="/login"
                     default-target-url="/success-login"
-                    authentication-failure-url="/error-login"/>
+                    authentication-failure-url="/login?failed=t"/>
 
         <security:logout logout-url="/logout"/>
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="userServiceSec" />
+        <security:authentication-provider user-service-ref="customUserDetails">
+            <security:password-encoder hash="plaintext" />
+        </security:authentication-provider>
     </security:authentication-manager>
 
-    <security:user-service id="userServiceSec">
-        <security:user name="habuma" password="letmein"
-              authorities="ROLE_ADMIN"/>
-    </security:user-service>
+    <bean id="customUserDetails" class="com.satanssoft.helix.CustomUserDetailsService"></bean>
+
 
 
 </beans>

@@ -12,12 +12,17 @@ public class SecurityController {
 
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    @ResponseBody
     public String login(Model model) {
 
         return "login";
     }
 
+    /*@RequestMapping(value = {"/process-login"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String processLogin(Model model) {
+
+        return "process-login";
+    }*/
 
     @RequestMapping(value = {"/success-login"}, method = RequestMethod.GET)
     @ResponseBody
@@ -27,11 +32,11 @@ public class SecurityController {
     }
 
 
-    @RequestMapping(value = {"/error-login"}, method = RequestMethod.GET)
+    /*@RequestMapping(value = {"/error-login"}, method = RequestMethod.GET)
     @ResponseBody
     public String errorLogin(Model model) {
 
         return "error-login";
-    }
+    }*/
 
 }
