@@ -9,16 +9,19 @@
     <meta charset="utf-8">
     <title>${title}</title>
 
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
     <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrapvalidator.css">
 
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/admin.css">
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-
 
     <script src="/resources/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/resources/vendor/bootstrap/js/bootstrapValidator.min.js"></script>
+
 
     <script src="/resources/js/admin.js"></script>
 </head>

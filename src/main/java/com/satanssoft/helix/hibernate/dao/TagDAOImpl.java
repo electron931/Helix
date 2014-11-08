@@ -60,6 +60,8 @@ public class TagDAOImpl implements TagDAO {
         Session session = this.sessionFactory.getCurrentSession();
         Tag tag = (Tag) session.get(Tag.class, tag_id);
         if(tag != null){
+            String sql = "DELETE FROM posts_tags WHERE tag_id='" + tag.getId() + "';";
+            session.createSQLQuery(sql).executeUpdate();
             session.delete(tag);
         }
     }

@@ -18,22 +18,26 @@
 
         <div class="form-group">
           <label>Title</label>
-          <input class="form-control" placeholder="Post Title" name="title" value="${post.title}">
+          <input class="form-control" required
+                 data-bv-notempty-message="Field is required" placeholder="Post Title" name="title" value="${post.title}">
         </div>
 
         <div class="form-group">
           <label>Short Descriprion</label>
-          <textarea class="form-control" rows="5" placeholder="Short Description..." name="shortDescription">${post.shortDescription}</textarea>
+          <textarea class="form-control" rows="5" required
+                    data-bv-notempty-message="Field is required" placeholder="Short Description..." name="shortDescription">${post.shortDescription}</textarea>
         </div>
 
         <div class="form-group">
           <label>Post Body</label>
-          <textarea class="form-control" rows="12" placeholder="Post Body..." name="description">${post.description}</textarea>
+          <textarea class="form-control" rows="12" required
+                    data-bv-notempty-message="Field is required" placeholder="Post Body..." name="description">${post.description}</textarea>
         </div>
 
         <div class="form-group">
           <label>Post Thumbnail Path</label>
-          <input class="form-control" placeholder="Thumbnail" name="thumbnail" value="${post.thumbnail}">
+          <input class="form-control" placeholder="Thumbnail" required
+                 data-bv-notempty-message="Field is required" name="thumbnail" value="${post.thumbnail}">
         </div>
 
 

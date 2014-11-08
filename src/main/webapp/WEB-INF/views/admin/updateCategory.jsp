@@ -18,7 +18,8 @@
 
         <div class="form-group">
           <label>Title</label>
-          <input class="form-control" placeholder="Post Title" name="title" value="${category.title}">
+          <input class="form-control" required
+                 data-bv-notempty-message="Field is required" placeholder="Post Title" name="title" value="${category.title}">
         </div>
 
         <div class="form-group">

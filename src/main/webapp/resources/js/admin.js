@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 
+    $('form').bootstrapValidator();
 
     $(".deletePost").click(function() {
 
@@ -51,6 +52,35 @@ $( document ).ready(function() {
                         alert("You can\'t delete category with posts");
                     }
 
+                },
+                fail: function() {
+                    console.log('error');
+                }
+            });
+        }
+
+    });
+
+
+
+
+    $(".deleteTag").click(function() {
+
+        var isDelete = confirm("Delete Tag?");
+        if (isDelete) {
+
+            var tagId = $(this).attr('id');
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/deleteTag",
+                data: {
+                    'tagId': tagId
+                },
+                success: function(data) {
+                    console.log('success');
+                    $(".tags table tbody #tag" + tagId).remove();
+                    $(".alert").remove();
                 },
                 fail: function() {
                     console.log('error');

@@ -227,7 +227,7 @@ public class AdminController {
         post.setTitle(title);
         post.setShortDescription(shortDescription);
         post.setDescription(description);
-        post.setUrlSlug(title.replaceAll(" ", "_").toLowerCase());
+        post.setUrlSlug(this.generateUrlSlugByTitle(title));
 
         Post oldPost = this.postService.getPostById(postId);
         post.setPostedOnDate(oldPost.getPostedOnDate());
@@ -407,8 +407,133 @@ public class AdminController {
     * End Categories
     * */
 
-    private String generateUrlSlugByTitle(String title) {
+
+
+    /*
+    * Tags
+    * */
+
+    @RequestMapping(value = {"/tags"}, method = RequestMethod.GET)
+    public String tags(Model model, @RequestParam(required = false) String isTagCreated,
+                             @RequestParam(required = false) String isTagUpdated,
+                             @RequestParam(required = false) String isError) {
+        List<Tag> tags = this.tagService.getAllTags();
+
+        model.addAttribute("tags", tags);
+        model.addAttribute("title", "Admin | Helix");
+
+
+        if (tags.size() == 0) {
+            model.addAttribute("isEmpty", true);
+        }
+        else {
+            model.addAttribute("isEmpty", false);
+        }
+
+        if (isTagCreated != null && isTagCreated.equals("yes")) {
+            model.addAttribute("isTagCreated", true);
+        }
+        else {
+            model.addAttribute("isTagCreated", false);
+        }
+
+        if (isTagUpdated != null && isTagUpdated.equals("yes")) {
+            model.addAttribute("isTagUpdated", true);
+        }
+        else {
+            model.addAttribute("isTagUpdated", false);
+        }
+
+        if (isError != null && isError.equals("yes")) {
+            model.addAttribute("isError", true);
+        }
+        else {
+            model.addAttribute("isError", false);
+        }
+
+        return "admin/tags";
+    }
+
+
+    @RequestMapping(value = {"/addTag"}, method = RequestMethod.GET)
+    public String addTagView(Model model) {
+        model.addAttribute("title", "Admin | Helix");
+        return "admin/addTag";
+    }
+
+
+    @RequestMapping(value = {"/addTag"}, method = RequestMethod.POST)
+    public String addTag(Model model, @RequestParam("name") String name) {
+
+        Tag tag = new Tag();
+        tag.setName(name);
+        tag.setUrlSlug(this.generateUrlSlugByTitle(name));
+
+        model.addAttribute("isTagCreated", "yes");
+
+        try {
+            this.tagService.addTag(tag);
+        }
+        catch (Exception e) {
+            model.addAttribute("isError", "yes");
+            model.addAttribute("isTagCreated", "no");
+        }
+
+        return "redirect:/admin/tags";
+    }
+
+
+    @RequestMapping(value = {"/tags/{tagSlug}"}, method = RequestMethod.GET)
+    public String updateTagView(Model model, @PathVariable("tagSlug") String tagSlug) {
+        Tag tag = this.tagService.getTagByUrlSlug(tagSlug);
+
+        model.addAttribute("tag", tag);
+        model.addAttribute("title", "Admin | Helix");
+
+        return "admin/updateTag";
+    }
+
+
+    @RequestMapping(value = {"/updateTag"}, method = RequestMethod.POST)
+    public String updateTag(Model model, @RequestParam("name") String name,
+                                 @RequestParam("tagId") int tagId) {
+
+        Tag oldTag = this.tagService.getTagById(tagId);
+
+        Tag tag = new Tag();
+        tag.setId(oldTag.getId());
+        tag.setName(name);
+        tag.setUrlSlug(this.generateUrlSlugByTitle(name));
+
+        model.addAttribute("isTagUpdated", "yes");
+
+        try {
+            this.tagService.updateTag(tag);
+        }
+        catch (Exception e) {
+            model.addAttribute("isError", "yes");
+            model.addAttribute("isTagUpdated", "no");
+        }
+
+        return "redirect:/admin/tags";
+    }
+
+
+    @RequestMapping(value = {"/deleteTag"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteTag(Model model, @RequestParam("tagId") int tagId) {
+        this.tagService.removeTag(tagId);
+        return "redirect:/admin/tags";
+    }
+
+
+    /*
+    * End Tags
+    * */
+
+     private String generateUrlSlugByTitle(String title) {
         return title.replaceAll(" ", "_").toLowerCase();
+
     }
 
 }

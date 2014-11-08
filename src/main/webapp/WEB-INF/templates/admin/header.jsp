@@ -57,7 +57,15 @@
                 </ul>
             </li>
             <li>
-                <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Tags</a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-arrows-v"></i> Tags <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="demo3" class="collapse">
+                    <li>
+                        <a href="/admin/addTag">Add Tag</a>
+                    </li>
+                    <li>
+                        <a href="/admin/tags">All Tags</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Comments</a>

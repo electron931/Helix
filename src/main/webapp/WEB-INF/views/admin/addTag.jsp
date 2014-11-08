@@ -12,24 +12,20 @@
     <!-- Blog Entries Column -->
     <div class="col-md-12 adminBlock">
 
-      <h1 class="page-header">Create Category</h1>
+      <h1 class="page-header">Create Tag</h1>
 
-      <form role="form" action="/admin/addCategory" method="post" >
-
-        <div class="form-group">
-          <label>Title</label>
-          <input class="form-control" placeholder="Category Title" name="title" required
-                 data-bv-notempty-message="Field is required">
-        </div>
+      <form role="form" action="/admin/addTag" method="post">
 
         <div class="form-group">
-          <label>Description</label>
-          <textarea class="form-control" rows="5" placeholder="Category Description..." name="description"></textarea>
+          <label>Name</label>
+          <input class="form-control" required
+                 data-bv-notempty-message="Field is required" placeholder="Tag Name" name="name">
         </div>
+
 
         <button type="reset" class="btn btn-default">Reset</button>
 
-        <button type="submit" class="btn btn-default pull-right">Save Category</button>
+        <button type="submit" class="btn btn-default pull-right">Save Tag</button>
 
       </form>
 
