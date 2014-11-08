@@ -91,6 +91,8 @@ public class PostDAOImpl implements PostDAO {
         Session session = this.sessionFactory.getCurrentSession();
         Post post = (Post) session.get(Post.class, post_id);
         if(post != null){
+            String sql = "DELETE FROM comments WHERE post_id='" + post.getId() + "';";
+            session.createSQLQuery(sql).executeUpdate();
             session.delete(post);
         }
     }

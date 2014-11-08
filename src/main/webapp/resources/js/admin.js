@@ -94,7 +94,7 @@ $( document ).ready(function() {
 
     $(".deleteUser").click(function() {
 
-        var isDelete = confirm("Are you sure? All posts written by this moderator will be also deleted.");
+        var isDelete = confirm("Are you sure? You can\'t delete moderator with posts");
         if (isDelete) {
 
             var userId = $(this).attr('id');
@@ -105,10 +105,17 @@ $( document ).ready(function() {
                 data: {
                     'userId': userId
                 },
-                success: function(data) {
-                    console.log('success');
-                    $(".users table tbody #user" + userId).remove();
-                    $(".alert").remove();
+                success: function(isDeleted) {
+
+                    if (isDeleted == "yes") {
+                        console.log('success');
+                        $(".users table tbody #user" + userId).remove();
+                        $(".alert").remove();
+                    }
+                    else {
+                        alert("You can\'t delete moderator with posts");
+                    }
+
                 },
                 fail: function() {
                     console.log('error');

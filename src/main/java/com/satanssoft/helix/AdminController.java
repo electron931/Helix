@@ -697,9 +697,21 @@ public class AdminController {
 
 
     @RequestMapping(value = {"/deleteUser"}, method = RequestMethod.POST)
+    @ResponseBody
     public String deleteUser(Model model, @RequestParam("userId") int userId) {
-        this.userService.removeUser(userId);
-        return "redirect:/admin/users";
+        User user = this.userService.getUserById(userId);
+        List<Post> posts = this.userService.getAllUserPosts(user);
+
+        model.addAttribute("isUserDeleted", "yes");
+
+        if (posts.size() == 0) {
+            this.userService.removeUser(userId);
+            return "yes";
+        }
+        else {
+            return "no";
+        }
+
     }
 
 
