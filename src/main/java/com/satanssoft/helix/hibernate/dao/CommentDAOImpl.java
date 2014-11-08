@@ -56,4 +56,11 @@ public class CommentDAOImpl implements CommentDAO {
         return comments;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Comment> getAllComments() {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Comment> comments = session.createCriteria(Comment.class).list();
+        return comments;
+    }
 }

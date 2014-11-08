@@ -1,13 +1,7 @@
 package com.satanssoft.helix;
 
-import com.satanssoft.helix.hibernate.model.Category;
-import com.satanssoft.helix.hibernate.model.Post;
-import com.satanssoft.helix.hibernate.model.Tag;
-import com.satanssoft.helix.hibernate.model.User;
-import com.satanssoft.helix.service.CategoryService;
-import com.satanssoft.helix.service.PostService;
-import com.satanssoft.helix.service.TagService;
-import com.satanssoft.helix.service.UserService;
+import com.satanssoft.helix.hibernate.model.*;
+import com.satanssoft.helix.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,6 +25,7 @@ public class AdminController {
     private CategoryService categoryService;
     private TagService tagService;
     private UserService userService;
+    private CommentService commentService;
 
 
     @Autowired(required = true)
@@ -56,6 +51,12 @@ public class AdminController {
     @Qualifier(value = "userService")
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "commentService")
+    public void setCommentService(CommentService commentService){
+        this.commentService = commentService;
     }
 
 
@@ -520,7 +521,6 @@ public class AdminController {
 
 
     @RequestMapping(value = {"/deleteTag"}, method = RequestMethod.POST)
-    @ResponseBody
     public String deleteTag(Model model, @RequestParam("tagId") int tagId) {
         this.tagService.removeTag(tagId);
         return "redirect:/admin/tags";
@@ -530,6 +530,26 @@ public class AdminController {
     /*
     * End Tags
     * */
+
+
+    @RequestMapping(value = {"/comments"}, method = RequestMethod.GET)
+    public String comments(Model model) {
+        List<Comment> comments = this.commentService.getAllComments();
+
+        if (comments.size() == 0) {
+            model.addAttribute("isEmpty", true);
+        }
+        else {
+            model.addAttribute("isEmpty", false);
+        }
+
+        model.addAttribute("comments", comments);
+        model.addAttribute("title", "Admin | Helix");
+
+        return "admin/comments";
+    }
+
+
 
      private String generateUrlSlugByTitle(String title) {
         return title.replaceAll(" ", "_").toLowerCase();

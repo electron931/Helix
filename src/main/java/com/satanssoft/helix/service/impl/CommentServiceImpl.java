@@ -46,4 +46,9 @@ public class CommentServiceImpl implements CommentService {
         return this.commentDAO.getAllUserComments(user);
     }
 
+    @Override
+    @Transactional
+    public List<Comment> getAllComments() {
+        return this.commentDAO.getAllComments();
+    }
 }

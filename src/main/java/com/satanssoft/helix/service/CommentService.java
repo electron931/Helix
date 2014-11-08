@@ -12,5 +12,6 @@ public interface CommentService {
     public Comment getCommentById(int comment_id);
     public void removeComment(int comment_id);
     public List<Comment> getAllUserComments(User user);
+    public List<Comment> getAllComments();
 
 }
