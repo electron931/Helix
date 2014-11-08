@@ -16,7 +16,6 @@
 
     <c:forEach var="category" items="${categories}">
 
-      <!-- Blog Post -->
       <tr id="category${category.id}">
         <td><a href="/admin/categories/${category.urlSlug}">${category.title}</a></td>
         <td>${category.description}</td>

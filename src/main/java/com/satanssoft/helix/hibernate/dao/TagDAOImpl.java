@@ -69,7 +69,8 @@ public class TagDAOImpl implements TagDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Post> getAllPostsForTag(Tag tag, int pageNumber, int postsPerPage) {
-        String hql = "select u from Post u inner join u.tags r where r.id =:id";
+        String hql = "select u from Post u inner join u.tags r" +
+                " where r.id =:id order by postedOnDate desc";
         Session session = this.sessionFactory.getCurrentSession();
         List<Post> posts = session.createQuery(hql)
                 .setInteger("id", tag.getId())

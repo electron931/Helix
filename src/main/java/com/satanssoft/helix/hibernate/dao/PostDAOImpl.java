@@ -7,6 +7,7 @@ import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.hibernate.model.Tag;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -35,7 +36,10 @@ public class PostDAOImpl implements PostDAO {
     @SuppressWarnings("unchecked")
     public List<Post> getAllPosts() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Post> posts = session.createCriteria(Post.class).list();
+        List<Post> posts = session
+                .createCriteria(Post.class)
+                .addOrder(Order.desc("postedOnDate"))
+                .list();
         return posts;
     }
 
@@ -43,8 +47,8 @@ public class PostDAOImpl implements PostDAO {
     @SuppressWarnings("unchecked")
     public List<Post> getPostsForPage(int pageNumber, int postsPerPage) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Post> posts = session.createQuery("from Post")
-                .setFirstResult( (pageNumber - 1) * postsPerPage )
+        List<Post> posts = session.createQuery("from Post order by postedOnDate desc")
+                .setFirstResult((pageNumber - 1) * postsPerPage)
                 .setMaxResults(postsPerPage)
                 .list();
         return posts;
@@ -56,7 +60,7 @@ public class PostDAOImpl implements PostDAO {
         Session session = this.sessionFactory.getCurrentSession();
         List<Post> posts = session.createQuery("from Post where title like :title or " +
                 "shortDescription like :shortDescription or " +
-                "description like :description")
+                "description like :description order by postedOnDate desc")
                 .setString("title", "%" + search + "%")
                 .setString("shortDescription", "%" + search + "%")
                 .setString("description", "%" + search + "%")
@@ -96,7 +100,7 @@ public class PostDAOImpl implements PostDAO {
     public List<Comment> getAllCommentsForPost(Post post) {
         Session session = this.sessionFactory.getCurrentSession();
         List<Comment> comments = session.createQuery("from Comment as comment" +
-                " where comment.post = :post")
+                " where comment.post = :post order by createdDate desc")
                 .setEntity("post", post)
                 .list();
         return comments;

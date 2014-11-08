@@ -36,6 +36,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public List<User> getAllModerators() {
+        return this.userDAO.getAllModerators();
+    }
+
+    @Override
+    @Transactional
     public User getUserById(int user_id) {
         return this.userDAO.getUserById(user_id);
     }
@@ -50,6 +56,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void removeUser(int user_id) {
         this.userDAO.removeUser(user_id);
+    }
+
+    @Override
+    @Transactional
+    public List<Post> getAllUserPosts(User user) {
+        return this.userDAO.getAllUserPosts(user);
     }
 
     @Override

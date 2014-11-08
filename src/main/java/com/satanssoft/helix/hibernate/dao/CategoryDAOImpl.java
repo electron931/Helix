@@ -66,7 +66,8 @@ public class CategoryDAOImpl implements CategoryDAO {
     @SuppressWarnings("unchecked")
     public List<Post> getAllPostsForCategory(Category category, int pageNumber, int postsPerPage) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Post> posts = session.createQuery("from Post as post where post.category = :category")
+        List<Post> posts = session.createQuery("from Post as post" +
+                " where post.category = :category order by postedOnDate desc")
                 .setEntity("category", category)
                 .setFirstResult((pageNumber - 1) * postsPerPage)
                 .setMaxResults(postsPerPage)

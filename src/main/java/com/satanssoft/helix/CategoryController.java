@@ -60,7 +60,7 @@ public class CategoryController {
 
     @Autowired(required = true)
     @Qualifier(value = "roleService")
-    public void setTagService(RoleService roleService) {
+    public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
     }
 
@@ -128,6 +128,10 @@ public class CategoryController {
         Role role = new Role();
         role.setRole("admin");
         this.roleService.addRole(role);
+
+        Role role2 = new Role();
+        role2.setRole("moderator");
+        this.roleService.addRole(role2);
 
         User user = new User();
         user.setUserName("Alex");

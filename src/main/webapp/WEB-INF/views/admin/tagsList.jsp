@@ -15,7 +15,6 @@
 
     <c:forEach var="tag" items="${tags}">
 
-      <!-- Blog Post -->
       <tr id="tag${tag.id}">
         <td><a href="/admin/tags/${tag.urlSlug}">${tag.name}</a></td>
         <td><span class="deleteTag" id="${tag.id}">Delete</span></td>

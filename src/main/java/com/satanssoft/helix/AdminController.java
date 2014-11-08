@@ -5,6 +5,8 @@ import com.satanssoft.helix.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,7 @@ public class AdminController {
     private TagService tagService;
     private UserService userService;
     private CommentService commentService;
+    private RoleService roleService;
 
 
     @Autowired(required = true)
@@ -59,6 +62,12 @@ public class AdminController {
         this.commentService = commentService;
     }
 
+    @Autowired(required = true)
+    @Qualifier(value = "roleService")
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
 
     @RequestMapping(value = {""}, method = RequestMethod.GET)
     public String admin(Model model) {
@@ -80,7 +89,19 @@ public class AdminController {
     public String posts(Model model, @RequestParam(required = false) String isPostCreated,
                         @RequestParam(required = false) String isPostUpdated,
                         @RequestParam(required = false) String isError) {
-        List<Post> posts = this.postService.getAllPosts();
+
+        UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = this.userService.getUserByName(userDetails.getUsername());
+
+        List<Post> posts;
+        if (currentUser.getRole().getId() == 1) {       //ROLE_ADMIN
+            posts = this.postService.getAllPosts();
+        }
+        else {                                          //ROLE_MODERATOR
+            posts = this.userService.getAllUserPosts(currentUser);
+        }
+
 
         model.addAttribute("posts", posts);
         model.addAttribute("title", "Admin | Helix");
@@ -549,6 +570,142 @@ public class AdminController {
         return "admin/comments";
     }
 
+
+    /*
+    * Users
+    * */
+
+
+    @RequestMapping(value = {"/users"}, method = RequestMethod.GET)
+    public String users(Model model, @RequestParam(required = false) String isUserCreated,
+                       @RequestParam(required = false) String isUserUpdated,
+                       @RequestParam(required = false) String isError) {
+        List<User> users = this.userService.getAllModerators();
+
+        model.addAttribute("users", users);
+        model.addAttribute("title", "Admin | Helix");
+
+
+        if (users.size() == 0) {
+            model.addAttribute("isEmpty", true);
+        }
+        else {
+            model.addAttribute("isEmpty", false);
+        }
+
+        if (isUserCreated != null && isUserCreated.equals("yes")) {
+            model.addAttribute("isUserCreated", true);
+        }
+        else {
+            model.addAttribute("isUserCreated", false);
+        }
+
+        if (isUserUpdated != null && isUserUpdated.equals("yes")) {
+            model.addAttribute("isUserUpdated", true);
+        }
+        else {
+            model.addAttribute("isUserUpdated", false);
+        }
+
+        if (isError != null && isError.equals("yes")) {
+            model.addAttribute("isError", true);
+        }
+        else {
+            model.addAttribute("isError", false);
+        }
+
+        return "admin/users";
+    }
+
+
+    @RequestMapping(value = {"/addUser"}, method = RequestMethod.GET)
+    public String addUserView(Model model) {
+        model.addAttribute("title", "Admin | Helix");
+        return "admin/addUser";
+    }
+
+
+    @RequestMapping(value = {"/addUser"}, method = RequestMethod.POST)
+    public String addUser(Model model, @RequestParam("username") String username,
+                         @RequestParam("password") String password,
+                         @RequestParam("email") String email) {
+
+        User user = new User();
+        user.setUserName(username);
+        user.setPassword(password);
+        user.setEmail(email);
+
+        //roles must be stored in db (require initial setup)
+        Role role = this.roleService.getRole(2);    //ROLE_MODERATOR
+        user.setRole(role);
+
+        model.addAttribute("isUserCreated", "yes");
+
+        try {
+            this.userService.addUser(user);
+        }
+        catch (Exception e) {
+            model.addAttribute("isError", "yes");
+            model.addAttribute("isUserCreated", "no");
+        }
+
+        return "redirect:/admin/users";
+    }
+
+
+    @RequestMapping(value = {"/users/{userId}"}, method = RequestMethod.GET)
+    public String updateUserView(Model model, @PathVariable("userId") int userId) {
+        User user = this.userService.getUserById(userId);
+
+        model.addAttribute("user", user);
+        model.addAttribute("title", "Admin | Helix");
+
+        return "admin/updateUser";
+    }
+
+
+    @RequestMapping(value = {"/updateUser"}, method = RequestMethod.POST)
+    public String updateUser(Model model, @RequestParam("username") String username,
+                                          @RequestParam("password") String password,
+                                          @RequestParam("email") String email,
+                                          @RequestParam("userId") int userId) {
+
+        User oldUser = this.userService.getUserById(userId);
+
+        User user = new User();
+        user.setId(oldUser.getId());
+        user.setUserName(username);
+        user.setPassword(password);
+        user.setEmail(email);
+
+        //roles must be stored in db (require initial setup)
+        Role role = this.roleService.getRole(2);    //ROLE_MODERATOR
+        user.setRole(role);
+
+        model.addAttribute("isUserUpdated", "yes");
+
+        try {
+            this.userService.updateUser(user);
+        }
+        catch (Exception e) {
+            model.addAttribute("isError", "yes");
+            model.addAttribute("isUserUpdated", "no");
+        }
+
+        return "redirect:/admin/users";
+    }
+
+
+    @RequestMapping(value = {"/deleteUser"}, method = RequestMethod.POST)
+    public String deleteUser(Model model, @RequestParam("userId") int userId) {
+        this.userService.removeUser(userId);
+        return "redirect:/admin/users";
+    }
+
+
+    /*
+    * End Users
+    * */
 
 
      private String generateUrlSlugByTitle(String title) {

@@ -90,4 +90,32 @@ $( document ).ready(function() {
 
     });
 
+
+
+    $(".deleteUser").click(function() {
+
+        var isDelete = confirm("Are you sure? All posts written by this moderator will be also deleted.");
+        if (isDelete) {
+
+            var userId = $(this).attr('id');
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/deleteUser",
+                data: {
+                    'userId': userId
+                },
+                success: function(data) {
+                    console.log('success');
+                    $(".users table tbody #user" + userId).remove();
+                    $(".alert").remove();
+                },
+                fail: function() {
+                    console.log('error');
+                }
+            });
+        }
+
+    });
+
 });

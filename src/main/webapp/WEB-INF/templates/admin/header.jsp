@@ -70,20 +70,19 @@
             <li>
                 <a href="/admin/comments"><i class="fa fa-fw fa-desktop"></i> Comments</a>
             </li>
-            <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Users</a>
-            </li>
-<%--            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                </ul>
-            </li>--%>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-arrows-v"></i> Moderators <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo4" class="collapse">
+                        <li>
+                            <a href="/admin/addUser">Add Moderator</a>
+                        </li>
+                        <li>
+                            <a href="/admin/users">All Moderators</a>
+                        </li>
+                    </ul>
+                </li>
+            </sec:authorize>
         </ul>
     </div>
     <!-- /.navbar-collapse -->
