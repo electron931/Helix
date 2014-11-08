@@ -65,6 +65,7 @@
             <!-- Posted Comments -->
             <div class="comments">
                 <h3>Comments:</h3>
+                <!-- Javascript magic -->
                 <%--<jsp:include page="comments.jsp" />--%>
             </div>
 

@@ -5,7 +5,7 @@
 <c:forEach var="comment" items="${comments}">
 
     <div class="media">
-        <a name="comment${comment.id}"></a>
+        <a name="#comment${comment.id}"></a>
         <div class="media-body">
             <h4 class="media-heading">${comment.userName}
                 <small><fmt:formatDate value="${comment.createdDate}" pattern="yyyy-MM-dd HH:mm" /></small>

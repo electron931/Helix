@@ -35,11 +35,11 @@
               <c:forEach var="comment" items="${comments}">
 
                 <tr>
-                  <td><a href="/posts/${comment.post.urlSlug}">${comment.post.title}</a></td>
+                  <td><a target="_blank" href="/posts/${comment.post.urlSlug}">${comment.post.title}</a></td>
                   <td>${comment.text}</td>
                   <td>${comment.userName}</td>
                   <td><fmt:formatDate value="${comment.createdDate}" pattern="yyyy-MM-dd HH:mm" /></td>
-                  <td><a href="/posts/${comment.post.urlSlug}#comment${comment.id}">Go to Comment</a></td>
+                  <td><a target="_blank" href="/posts/${comment.post.urlSlug}#comment${comment.id}">Go to Comment</a></td>
                 </tr>
 
               </c:forEach>

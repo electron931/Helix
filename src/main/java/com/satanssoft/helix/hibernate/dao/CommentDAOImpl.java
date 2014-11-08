@@ -5,6 +5,7 @@ import com.satanssoft.helix.hibernate.model.Comment;
 import com.satanssoft.helix.hibernate.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -60,7 +61,10 @@ public class CommentDAOImpl implements CommentDAO {
     @SuppressWarnings("unchecked")
     public List<Comment> getAllComments() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Comment> comments = session.createCriteria(Comment.class).list();
+        List<Comment> comments = session
+                .createCriteria(Comment.class)
+                .addOrder(Order.desc("createdDate"))
+                .list();
         return comments;
     }
 }
