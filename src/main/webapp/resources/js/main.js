@@ -37,6 +37,25 @@ $( document ).ready(function() {
     });
 
 
+    $(document).on('click','.comments .media button',function(){
+        var commentId = $(this).attr('id');
+        $.ajax({
+            type: "POST",
+            url: "/comments/deleteComment",
+            data: {
+                'commentId': commentId
+            },
+            success: function(data) {
+                console.log('success');
+                $(".comments #commentBlock" + commentId).remove();
+            },
+            fail: function() {
+                console.log('error');
+            }
+        });
+    });
+
+
 
 
 });

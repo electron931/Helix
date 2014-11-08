@@ -115,3 +115,8 @@ body > .container {
     border-radius: 5px;
 }
 
+.isModerator {
+    color: #a94442;
+    font-weight: bold;
+}
+

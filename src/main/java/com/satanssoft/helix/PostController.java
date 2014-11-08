@@ -1,6 +1,7 @@
 package com.satanssoft.helix;
 
 import com.satanssoft.helix.hibernate.model.Category;
+import com.satanssoft.helix.hibernate.model.Comment;
 import com.satanssoft.helix.hibernate.model.Post;
 import com.satanssoft.helix.hibernate.model.Tag;
 import com.satanssoft.helix.service.CategoryService;
@@ -59,12 +60,14 @@ public class PostController {
         List<Tag> tags = this.postService.getAllTagsForPost(post);
         List<Category> categories = this.categoryService.getAllCategories();
         List<Tag> allTags = this.tagService.getAllTags();
+        List<Comment> comments = this.postService.getAllCommentsForPost(post);
 
         model.addAttribute("post", post);
         model.addAttribute("title", post.getTitle() + " | Helix");
         model.addAttribute("tags", tags);
         model.addAttribute("categories", categories);
         model.addAttribute("allTags", allTags);
+        model.addAttribute("comments", comments);
 
         return "singlePost";
     }

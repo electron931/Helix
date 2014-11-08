@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags" %>
 
 
 <tiles:insertDefinition name="defaultTemplate">
@@ -51,12 +53,12 @@
                 <h4>Leave a Comment:</h4>
                 <form role="form" action="/comments/add" method="post">
                     <div class="form-group">
-                        <input type="text" required
-                               data-bv-notempty-message="Field is required" class="form-control commentName" name="userName" placeholder="Name" >
+                        <sec:authorize access="!hasRole('ROLE_MODERATOR')">
+                            <input type="text" required class="form-control commentName" name="userName" placeholder="Name" >
+                        </sec:authorize>
                         <input type="hidden" name="postId" value="${post.id}" >
                         <input type="hidden" name="postSlug" value="${post.urlSlug}" >
-                        <textarea class="form-control" required
-                                  data-bv-notempty-message="Field is required" rows="3" name="commentText" placeholder="Your thoughts..." ></textarea>
+                        <textarea class="form-control" required rows="3" name="commentText" placeholder="Your thoughts..." ></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -67,8 +69,7 @@
             <!-- Posted Comments -->
             <div class="comments">
                 <h3>Comments:</h3>
-                <!-- Javascript magic -->
-                <%--<jsp:include page="comments.jsp" />--%>
+                <jsp:include page="comments.jsp" />
             </div>
 
         </div>
@@ -78,8 +79,8 @@
 
 
         <script>
-
-            $( document ).ready(function() {
+            //with this doesn't work anchor links
+            /*$( document ).ready(function() {
 
                 //Comments
                 var alreadyGet = false;
@@ -125,7 +126,7 @@
                         console.log('error');
                     }
                 });
-            }
+            }*/
 
         </script>
 

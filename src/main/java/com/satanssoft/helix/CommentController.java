@@ -5,12 +5,13 @@ import com.satanssoft.helix.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -52,11 +53,19 @@ public class CommentController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addComment(Model model, @RequestParam("userName") String userName,
+    public String addComment(Model model, @RequestParam(required = false) String userName,
                                           @RequestParam("postId") int postId,
                                           @RequestParam("postSlug") String postSlug,
                                           @RequestParam("commentText") String commentText) {
         Comment comment = new Comment();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetails =
+                    (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            userName = "<span class='isModerator'>" + userDetails.getUsername() + "</span>";
+        }
+
         comment.setUserName(userName);
         comment.setText(commentText);
 
@@ -68,6 +77,14 @@ public class CommentController {
         int commentId = this.commentService.addComment(comment);
 
         return "redirect:/posts/" + postSlug + "#comment" + commentId;
+    }
+
+
+    @RequestMapping(value = {"/deleteComment"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteComment(Model model, @RequestParam("commentId") int commentId) {
+        this.commentService.removeComment(commentId);
+        return "deleted";
     }
 
 
