@@ -8,7 +8,7 @@
         <h4>Blog Search</h4>
         <form action="/posts" method="get">
             <div class="input-group">
-                <input type="text" class="form-control" name="search">
+                <input type="text" class="form-control" required name="search">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">
                             <span class="glyphicon glyphicon-search"></span>

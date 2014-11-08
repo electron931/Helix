@@ -51,10 +51,12 @@
                 <h4>Leave a Comment:</h4>
                 <form role="form" action="/comments/add" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control commentName" name="userName" placeholder="Name" >
+                        <input type="text" required
+                               data-bv-notempty-message="Field is required" class="form-control commentName" name="userName" placeholder="Name" >
                         <input type="hidden" name="postId" value="${post.id}" >
                         <input type="hidden" name="postSlug" value="${post.urlSlug}" >
-                        <textarea class="form-control" rows="3" name="commentText" placeholder="Your thoughts..." ></textarea>
+                        <textarea class="form-control" required
+                                  data-bv-notempty-message="Field is required" rows="3" name="commentText" placeholder="Your thoughts..." ></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
