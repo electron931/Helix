@@ -2,6 +2,8 @@
 *.iml
 *.log
 *.jpg
+*.png
+*.gif
 ## Directory-based project format:
 .idea/
 

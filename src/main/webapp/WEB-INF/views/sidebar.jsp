@@ -54,46 +54,15 @@
     <div class="well">
         <h4>Tags</h4>
         <div class="row">
-            <div class="col-lg-3">
-                <ul class="list-unstyled">
+            <div class="col-lg-12">
+                <ul class="list-unstyled sidebarTags">
 
-                    <c:forEach var="tag" items="${allTags}" begin="0" step="4">
-                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
+                    <c:forEach var="tag" items="${allTags}">
+                        <li><a href="/tag/${tag.urlSlug}" class="label label-info tag">${tag.name}</a></li>
                     </c:forEach>
 
                 </ul>
             </div>
-
-            <div class="col-lg-3">
-                <ul class="list-unstyled">
-
-                    <c:forEach var="tag" items="${allTags}" begin="1" step="4">
-                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
-                    </c:forEach>
-
-                </ul>
-            </div>
-
-            <div class="col-lg-3">
-                <ul class="list-unstyled">
-
-                    <c:forEach var="tag" items="${allTags}" begin="2" step="4">
-                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
-                    </c:forEach>
-
-                </ul>
-            </div>
-
-            <div class="col-lg-3">
-                <ul class="list-unstyled">
-
-                    <c:forEach var="tag" items="${allTags}" begin="3" step="4">
-                        <li><a href="/tag/${tag.urlSlug}" class="label label-info">${tag.name}</a></li>
-                    </c:forEach>
-
-                </ul>
-            </div>
-
         </div>
     </div>
 

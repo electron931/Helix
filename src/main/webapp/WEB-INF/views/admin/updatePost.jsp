@@ -71,8 +71,6 @@
                 </c:otherwise>
               </c:choose>
 
-
-
             </label>
 
           </c:forEach>

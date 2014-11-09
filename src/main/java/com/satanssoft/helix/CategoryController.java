@@ -96,21 +96,17 @@ public class CategoryController {
 
     @RequestMapping(value = "/{categorySlug}", method = RequestMethod.POST)
     public String loadMorePosts(Model model, @PathVariable("categorySlug") String categorySlug) {
-
         pageNumber++;
         List<Post> posts = this.categoryService
                 .getAllPostsForCategory(this.category, pageNumber, POSTS_PER_PAGE);
 
-
         model.addAttribute("posts", posts);
-        //model.addAttribute("categories", categories);
 
         return "posts";
     }
 
 
     @RequestMapping(value = "/setup", method = RequestMethod.GET)
-    //public String test(@RequestParam("category_id") int category_id, Model model) {
     public String setup(Model model) {
 
         Category category1 = new Category();
@@ -134,14 +130,28 @@ public class CategoryController {
         this.roleService.addRole(role2);
 
         User user = new User();
-        user.setUserName("Alex");
+        user.setUserName("Admin");
         user.setPassword("12345");
-        user.setEmail("alex@gmail.com");
+        user.setEmail("admin@test.com");
         user.setRole(role);
         this.userService.addUser(user);
 
+        User user2 = new User();
+        user2.setUserName("Sergey");
+        user2.setPassword("qwerty");
+        user2.setEmail("sergey@test.com");
+        user2.setRole(role2);
+        this.userService.addUser(user2);
 
-        for (int i = 1; i <= 5; i++) {
+        User user3 = new User();
+        user3.setUserName("Alex");
+        user3.setPassword("54321");
+        user3.setEmail("alex@test.com");
+        user3.setRole(role2);
+        this.userService.addUser(user3);
+
+
+        for (int i = 1; i <= 10; i++) {
             Tag tag = new Tag();
             tag.setName("tag" + i);
             tag.setUrlSlug("tag" + i);
@@ -155,7 +165,7 @@ public class CategoryController {
         for (int i = 1; i <= 30; i++) {
             Post post = new Post();
             post.setTitle("Post" + i);
-            post.setShortDescription("lorem ipsum" + i);
+            post.setShortDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada." + i);
             post.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porta placerat ipsum pulvinar malesuada. Mauris lobortis aliquam neque sit amet consectetur. Donec et nibh a metus mollis dictum finibus a massa. Curabitur in sem est. Nunc a scelerisque libero. Maecenas sit amet neque nisi. Phasellus sed fermentum diam. Nunc sed ipsum enim. Praesent non augue est. Etiam quis tempus risus.");
             post.setUrlSlug("post" + i);
             post.setPostedOnDate(new Date());
@@ -166,21 +176,15 @@ public class CategoryController {
             }
 
             if (i % 2 == 0) {
-                post.setCategory(this.categoryService.getCategoryById(1));
-            }
-            else {
                 post.setCategory(this.categoryService.getCategoryById(2));
-            }
-
-            post.setAuthor(user);
-
-            if (i % 2 == 0) {
-                post.setTags(tags.subList(1, 3));
+                post.setAuthor(user3);
+                post.setTags(tags.subList(5, 9));
             }
             else {
-                post.setTags(tags);
+                post.setCategory(this.categoryService.getCategoryById(1));
+                post.setAuthor(user2);
+                post.setTags(tags.subList(0, 4));
             }
-
 
             this.postService.addPost(post);
         }

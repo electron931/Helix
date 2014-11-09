@@ -55,7 +55,6 @@ public class PostController {
 
     @RequestMapping(value = "/{postSlug}")
     public String singlePost(Model model, @PathVariable("postSlug") String postSlug) {
-
         Post post = this.postService.getPostByUrlSlug(postSlug);
         List<Tag> tags = this.postService.getAllTagsForPost(post);
         List<Category> categories = this.categoryService.getAllCategories();

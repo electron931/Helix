@@ -10,8 +10,8 @@
         <div class="col-md-8">
 
             <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
+                Helix Blog
+                <small>Crazy Thoughts of Crazy People</small>
             </h1>
 
             <c:choose>

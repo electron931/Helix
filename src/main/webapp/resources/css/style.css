@@ -120,3 +120,11 @@ body > .container {
     font-weight: bold;
 }
 
+.sidebarTags .tag {
+    float: left;
+}
+
+.tag {
+    margin: 10px;
+}
+

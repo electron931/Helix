@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -213,7 +215,6 @@ public class AdminController {
 
     @RequestMapping(value = {"/posts/{postSlug}"}, method = RequestMethod.GET)
     public String updatePostView(Model model, @PathVariable("postSlug") String postSlug) {
-
         List<Category> categories = this.categoryService.getAllCategories();
         List<Tag> tags = this.tagService.getAllTags();
         Post post = this.postService.getPostByUrlSlug(postSlug);
@@ -719,10 +720,16 @@ public class AdminController {
     * End Users
     * */
 
-
-     private String generateUrlSlugByTitle(String title) {
-        return title.replaceAll(" ", "_").toLowerCase();
-
+    //WTF
+    private String generateUrlSlugByTitle(String title) {
+        return title
+                .replace(" ", "_")
+                .replace(".", "_")
+                .replace("!", "_")
+                .replace("?", "_")
+                .replace(",", "_")
+                .replace(":", "_")
+                .toLowerCase();
     }
 
 }
